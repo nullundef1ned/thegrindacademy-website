@@ -7,11 +7,10 @@ export type MessageResponse = {
   message: string
 }
 
-export type AutoXError = {
+export type CustomError = {
   status: number,
   statusText: string,
   message: string,
-  error: any
 }
 
 const config: AxiosRequestConfig = {
@@ -38,7 +37,7 @@ export default function useAxios() {
       const { onLine } = window.navigator;
       if (!onLine) return Promise.reject(error);
 
-      const errorData = error.response?.data as unknown as AutoXError;
+      const errorData = error.response?.data as unknown as CustomError;
       return Promise.reject(errorData);
     }
   )
