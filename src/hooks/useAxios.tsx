@@ -2,8 +2,6 @@
 
 import environmentUtil from '@/utils/env.util'
 import axios, { AxiosRequestConfig } from 'axios'
-import { usePathname } from 'next/navigation';
-import useURL from './useURL';
 
 export type MessageResponse = {
   message: string
@@ -24,9 +22,6 @@ const config: AxiosRequestConfig = {
 }
 
 export default function useAxios() {
-  const pathname = usePathname();
-  const { updateParams } = useURL();
-
   const axiosInstance = axios.create(config);
 
   axiosInstance.interceptors.request.use((config) => {

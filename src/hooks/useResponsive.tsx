@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useResponsive() {
   const breakpoints = [640, 768, 1024, 1280, 1536]
@@ -26,7 +26,7 @@ export default function useResponsive() {
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [breakpoints])
 
   return { isMobile, isTablet, isDesktop, screenSize };
 }
