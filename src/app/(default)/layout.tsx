@@ -8,7 +8,7 @@ type DefaultLayoutProps = {
 
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
-    <main className='w-screen min-h-screen overflow-x-hidden relative'>
+    <main className='relative w-screen overflow-x-hidden'>
       <Header />
       {children}
       <Footer />

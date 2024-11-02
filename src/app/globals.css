@@ -16,7 +16,7 @@ body {
   }
 
   .root-section {
-    @apply root-padding max-w-screen-2xl mx-auto;
+    @apply root-padding max-w-screen-xl mx-auto;
   }
 
   .radial-gradient {
