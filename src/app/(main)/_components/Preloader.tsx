@@ -9,7 +9,7 @@ export default function Preloader() {
   const [loadPercentage, setLoadPercentage] = useState(0);
 
   const intervalTime = 4000 / 100; // 4 seconds
-  const timeBeforeNextLoad = 1000 * 60 * 5; // 5 minutes
+  // const timeBeforeNextLoad = 1000 * 60 * 5; // 5 minutes
 
   // const lastLoadedTime = localStorage.getItem('lastLoadedTime');
 
