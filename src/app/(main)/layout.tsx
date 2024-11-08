@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer';
+import Preloader from './_components/Preloader';
 
 type DefaultLayoutProps = {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ type DefaultLayoutProps = {
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <main className='relative w-screen overflow-x-hidden'>
+      <Preloader />
       <Header />
       {children}
       <Footer />

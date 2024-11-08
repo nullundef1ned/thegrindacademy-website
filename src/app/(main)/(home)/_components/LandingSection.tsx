@@ -25,8 +25,8 @@ export default function LandingSection() {
             </h3>
           </div>
           <div className="flex flex-wrap gap-4" data-aos='fade-right' data-aos-delay={initialDelay + 400}>
-            <Button variant='outline'>Explore our courses</Button>
-            <Button>Start your journey</Button>
+            <Button variant='outline' href='/courses'>Explore our courses</Button>
+            <Button href='/subscription'>Start your journey</Button>
           </div>
           <div className="flex items-center space-x-3" data-aos='fade-right' data-aos-delay={initialDelay + 600}>
             <p className='text-accent text-sm'>Over 1000+ students have enrolled and counting!</p>

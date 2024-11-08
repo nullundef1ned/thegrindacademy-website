@@ -60,7 +60,7 @@ export default function CommunityInvitationSection() {
             <p className='text-center text-accent' data-aos='fade-up' data-aos-delay={initialDelay + 200}>
               Gain access to our exclusive Telegram channels where you can interact with instructors, network with peers, and share your progress
             </p>
-            <Button data-aos='fade-up' data-aos-delay={initialDelay + 400}>Gain Access</Button>
+            <Button href='/subscription' data-aos='fade-up' data-aos-delay={initialDelay + 400}>Gain Access</Button>
           </div>
         </div>
         <div className='hidden lg:block col-span-2' data-aos='fade-left' data-aos-delay={initialDelay + 1000}>
