@@ -9,10 +9,11 @@ import RiskFreeSection from './_components/RiskFreeSection';
 import SuccessStoriesSection from './_components/SuccessStoriesSection';
 import CertificateSection from './_components/CertificateSection';
 import FAQSection from './_components/FAQSection';
+import { Fragment } from 'react';
 
 export default function Home() {
   return (
-    <div className='space-y-4'>
+    <Fragment>
       <LandingSection />
       <CourseOfferingsSection />
       <CommunityInvitationSection />
@@ -24,6 +25,6 @@ export default function Home() {
       <SuccessStoriesSection />
       <CertificateSection />
       <FAQSection />
-    </div>
+    </Fragment>
   );
 }

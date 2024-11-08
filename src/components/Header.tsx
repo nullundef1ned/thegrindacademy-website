@@ -43,7 +43,7 @@ export default function Header() {
           ))}
         </div>
         <div className='hidden md:flex items-center gap-4'>
-          <Button variant='outline'>Log in</Button>
+          <Button href='https://app.thegrindacademy.com' target='_blank' variant='outline'>Log in</Button>
           <Button href='/subscription'>Sign up</Button>
         </div>
       </div>

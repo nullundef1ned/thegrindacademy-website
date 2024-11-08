@@ -10,10 +10,12 @@ type DefaultLayoutProps = {
 export default function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
     <main className='relative w-screen overflow-x-hidden'>
-      <Preloader />
       <Header />
-      {children}
+      <div className='relative min-h-screen space-y-4'>
+        {children}
+      </div>
       <Footer />
+      <Preloader />
     </main>
   )
 }

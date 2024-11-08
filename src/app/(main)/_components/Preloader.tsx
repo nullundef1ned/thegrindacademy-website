@@ -11,17 +11,17 @@ export default function Preloader() {
   const intervalTime = 4000 / 100; // 4 seconds
   const timeBeforeNextLoad = 1000 * 60 * 5; // 5 minutes
 
-  const lastLoadedTime = localStorage.getItem('lastLoadedTime');
+  // const lastLoadedTime = localStorage.getItem('lastLoadedTime');
 
   useEffect(() => {
     const interval = setInterval(() => {
       setLoadPercentage(prev => {
-        if (prev >= 120) {
+        if (prev >= 130) {
           clearInterval(interval);
           return prev;
         }
         if (prev === 100) {
-          localStorage.setItem('lastLoadedTime', new Date().toISOString());
+          // localStorage.setItem('lastLoadedTime', new Date().toISOString());
         }
         return prev + 1;
       });
@@ -43,7 +43,9 @@ export default function Preloader() {
 
   const barLoadStyles = getBarLoadStyles(loadPercentage);
 
-  if (lastLoadedTime && new Date().getTime() - new Date(lastLoadedTime).getTime() < timeBeforeNextLoad) return null;
+  // if (lastLoadedTime && new Date().getTime() - new Date(lastLoadedTime).getTime() < timeBeforeNextLoad) return null;
+
+  if (loadPercentage === 130) return null;
 
   return (
     <div className={clsx(loadPercentage == 120 && 'opacity-0 -z-50', 'fixed inset-0 bg-background z-50 flex flex-col items-center justify-center transition-opacity duration-700')}>
