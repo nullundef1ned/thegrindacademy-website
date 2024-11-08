@@ -77,10 +77,14 @@ const downloadFile = (url: string, filename: string) => {
   document.body.removeChild(link);
 }
 
+const convertToNumber = (value: string | number): number => {
+  return typeof value == 'string' ? parseFloat(value) : value;
+}
+
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
-const helperUtil = { formatPhoneNumber, getTimeDelta, formatDate, formatTime, capitalize, downloadFile }
+const helperUtil = { formatPhoneNumber, getTimeDelta, formatDate, formatTime, capitalize, downloadFile, convertToNumber }
 
 export default helperUtil

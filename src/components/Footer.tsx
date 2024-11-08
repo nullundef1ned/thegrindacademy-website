@@ -23,9 +23,11 @@ export default function Footer() {
   ]
 
   return (
-    <footer className='bg-[#12192866] border-t border-[#B0CAFF26] relative'>
+    <footer className='bg-[#12192866] border-t border-[#B0CAFF26] relative overflow-hidden'>
       <div className="root-section !pt-14 !pb-32 flex flex-col md:flex-row items-start gap-10 justify-between">
-        <Image src='/logos/secondary-logo.svg' alt='The Grind Academy Secondary Logo' width={160} height={70} />
+        <Link href='/'>
+          <Image src='/logos/secondary-logo.svg' alt='The Grind Academy Secondary Logo' width={160} height={70} />
+        </Link>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 w-full md:w-auto">
           <div className="space-y-6">
             <p className='text-primary-100 font-semibold'>Quick Links</p>
@@ -55,7 +57,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      {/* <Image src='/logos/landscape-logo.svg' alt='The Grind Academy Primary Logo' width={160} height={70} className='absolute top-0 left-1/2 -translate-x-1/2' /> */}
+      <div className='absolute -bottom-16 left-1/2 -translate-x-1/2 w-full h-40'>
+        <Image src='/logos/landscape-logo.svg' alt='The Grind Academy Primary Logo' fill className='object-cover' />
+      </div>
     </footer>
   )
 }
