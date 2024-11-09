@@ -19,37 +19,37 @@ export default function CommunityInvitationSection() {
             dataAos='fade-down-right'
             dataAosDelay={initialDelay + 600} size={24}
             containerClassName='absolute -top-3 left-6'
-            className='text-primary-100 opacity-30 rotate-12 transition-all animate-hover-bounce delay-300'
+            className='text-primary-100 opacity-30 hover:opacity-100 rotate-12 transition-all animate-hover-bounce delay-300'
             icon='ri:trophy-fill' />
           <IconifyIcon
             dataAos='fade-down-left'
             dataAosDelay={initialDelay + 600} size={24}
             containerClassName='absolute top-0 right-4 sm:right-0'
-            className='text-primary-100 opacity-30 rotate-12 transition-all animate-hover-bounce delay-100'
+            className='text-primary-100 opacity-30 hover:opacity-100 rotate-12 transition-all animate-hover-bounce delay-100'
             icon='ri:money-dollar-circle-fill' />
           <IconifyIcon
             dataAos='fade-left'
             dataAosDelay={initialDelay + 600} size={24}
             containerClassName='absolute top-1/2 right-0 sm:-right-10'
-            className='text-primary-100 opacity-30 rotate-12 transition-all animate-hover-bounce delay-200'
+            className='text-primary-100 opacity-30 hover:opacity-100 rotate-12 transition-all animate-hover-bounce delay-200'
             icon='ri:compass-fill' />
           <IconifyIcon
             dataAos='fade-right'
             dataAosDelay={initialDelay + 600} size={24}
             containerClassName='absolute top-1/2 left-0 sm:-left-10'
-            className='text-primary-100 opacity-30 rotate-12 transition-all animate-hover-bounce delay-500'
+            className='text-primary-100 opacity-30 hover:opacity-100 rotate-12 transition-all animate-hover-bounce delay-500'
             icon='ri:map-pin-2-fill' />
           <IconifyIcon
             dataAos='fade-up-right'
             dataAosDelay={initialDelay + 600} size={24}
             containerClassName='absolute -bottom-10 left-10 sm:-left-4'
-            className='text-primary-100 opacity-30 rotate-12 transition-all animate-hover-bounce delay-700'
+            className='text-primary-100 opacity-30 hover:opacity-100 rotate-12 transition-all animate-hover-bounce delay-700'
             icon='ri:telegram-fill' />
           <IconifyIcon
             dataAos='fade-up-left'
             dataAosDelay={initialDelay + 600} size={24}
             containerClassName='absolute -bottom-8 right-3'
-            className='text-primary-100 opacity-30 rotate-12 transition-all animate-hover-bounce'
+            className='text-primary-100 opacity-30 hover:opacity-100 rotate-12 transition-all animate-hover-bounce'
             icon='ri:book-open-fill' />
 
           <div className='flex flex-col items-center space-y-6'>
