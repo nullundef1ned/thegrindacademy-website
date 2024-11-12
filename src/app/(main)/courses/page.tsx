@@ -3,7 +3,6 @@ import IconifyIcon from '@/components/IconifyIcon';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment } from 'react'
 
 export default function CoursesPage() {
   const initialDelay = 300;
