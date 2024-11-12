@@ -20,7 +20,7 @@ export default function CertificateSection() {
             </span>
           </h2>
           <p className='text-accent text-center' data-aos='fade-up' data-aos-delay={initialDelay}>
-            Get your questions answered and gain insights directly from experienced instructors in real time
+            This credential distinguishes you as a leader and innovator within your field, enhancing your credibility and visibility. With our certification, you can showcase your advanced skills, opening doors to new opportunities and achieving recognition from peers and employers alike. Position yourself as a certified expert and elevate your professional status.
           </p>
         </div>
       </div>
@@ -30,7 +30,7 @@ export default function CertificateSection() {
         </div>
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10 left-1/2 -translate-x-1/2 bg-white/10' />
       </div>
-      <Button href='/subscription' className='mx-auto' data-aos='fade-up' data-aos-delay={initialDelay + 400}>
+      <Button href='/subscription' className='mx-auto' data-aos='fade-up' data-aos-delay={initialDelay}>
         Get Started
       </Button>
     </div>
