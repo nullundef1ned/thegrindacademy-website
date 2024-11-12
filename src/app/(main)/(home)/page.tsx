@@ -18,10 +18,10 @@ export default function Home() {
       <CourseOfferingsSection />
       <CommunityInvitationSection />
       <CoursesSection />
-      <InfoSection />
       <TestimonialSection />
-      <PlansSection />
+      <InfoSection />
       <RiskFreeSection />
+      <PlansSection />
       <SuccessStoriesSection />
       <CertificateSection />
       <FAQSection />
