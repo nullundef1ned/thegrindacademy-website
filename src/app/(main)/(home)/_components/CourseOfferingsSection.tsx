@@ -30,13 +30,13 @@ export default function CourseOfferingsSection() {
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10' />
         <div className='space-y-4 md:w-1/2'>
           <h2 className='text-4xl lg:text-5xl text-center font-gishaBold' data-aos='fade-up'>
-            Transform Your Skills into {' '}
+            Unlock Financial Power in {' '}
             <span className='text-primary-200'>
-              Real Results
+              30 days
             </span>
           </h2>
           <p className='text-accent text-center' data-aos='fade-up' data-aos-delay={initialDelay}>
-            Unlock actionable strategies, scale your business, and get expert 1-on-1 guidance to accelerate your path to success.
+            Access Top-Tier Learning Resources, Expert Guidance One-on-One, Scale Rapidly to 7 Figures/ Month
           </p>
         </div>
       </div>

@@ -14,19 +14,15 @@ export default function LandingSection() {
         <div className='space-y-6'>
           <div className='space-y-4'>
             <h1 className='text-4xl text-center lg:text-left lg:text-6xl font-gishaBold' data-aos='fade-right' data-aos-delay={initialDelay}>
-              Unlock Skills That Propel
-              <br />
-              <span className='text-primary-200'>You Forward</span>
+              Master the Skill of Making <span className='text-primary-200'>Money</span>
             </h1>
             <h3 className='text-accent text-center lg:text-left' data-aos='fade-right' data-aos-delay={initialDelay}>
-              Exclusive courses designed to sharpen your skills and accelerate your growth.
-              <br />
-              Start learning today and join a community of like-minded achievers
+              Where 90% Grind Meets 10% Talent.
             </h3>
           </div>
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start" data-aos='fade-right' data-aos-delay={initialDelay}>
             <Button variant='outline' href='/courses'>Explore our courses</Button>
-            <Button href='/subscription'>Start your journey</Button>
+            <Button href='/subscription'>Join the Grind Academy</Button>
           </div>
           <div className="flex items-center space-x-3 justify-center lg:justify-start" data-aos='fade-right' data-aos-delay={initialDelay}>
             <p className='text-accent text-sm'>Over 1000+ students have enrolled and counting!</p>

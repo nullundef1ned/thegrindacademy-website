@@ -36,13 +36,13 @@ export default function CoursesSection() {
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10' />
         <div className='space-y-4 md:w-1/2'>
           <h2 className='text-4xl lg:text-5xl text-center font-gishaBold' data-aos='fade-up'>
-            Courses Tailored to {' '}
+            Learn Beyond your {' '}
             <span className='text-primary-200'>
-              Your Goals
+              First Million
             </span>
           </h2>
           <p className='text-accent text-center' data-aos='fade-up' data-aos-delay={initialDelay}>
-            Whether you&apos;re just starting or advancing your skills, our curated selection of courses covers a wide range of industries and disciplines
+            When new technologies emerge, <span className='font-gishaBold text-primary-200'>The Grind Academy</span> ensures you&apos;re first in line to capitalize. Our students receive cutting-edge updates every morning at 8 AM, keeping you informed and ahead of the curve.
           </p>
         </div>
       </div>

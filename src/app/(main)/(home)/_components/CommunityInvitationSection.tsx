@@ -54,13 +54,13 @@ export default function CommunityInvitationSection() {
 
           <div className='flex flex-col items-center space-y-6'>
             <h3 className='text-center font-gishaBold text-4xl' data-aos='fade-up' data-aos-delay={initialDelay}>
-              Join The Grind Academy <br />
-              <span className='text-primary-200'>Today</span>
+              Profit in 30 Days or Your Money Back. <br />
+              <span className='text-primary-200'>Guaranteed.</span>
             </h3>
             <p className='text-center text-accent' data-aos='fade-up' data-aos-delay={initialDelay}>
-              Gain access to our exclusive Telegram channels where you can interact with instructors, network with peers, and share your progress
+              Allow us take you hand in hand, clearly showing you exactly what to do and how to do it to generate income within the next 30 days.
             </p>
-            <Button href='/subscription' data-aos='fade-up' data-aos-delay={initialDelay}>Gain Access</Button>
+            <Button href='/subscription' data-aos='fade-up' data-aos-delay={initialDelay}>Join the Grind Academy</Button>
           </div>
         </div>
         <div className='hidden lg:block col-span-2' data-aos='fade-left' data-aos-delay={initialDelay}>

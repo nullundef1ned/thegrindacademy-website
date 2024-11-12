@@ -6,24 +6,28 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 export default function FAQSection() {
   const faqs = [
     {
-      question: 'What is Grind Academy?',
-      answer: 'Grind Academy is an online learning platform that offers skill-building courses through a subscription-based model. We provide high-quality video and text-based courses, alongside access to exclusive Telegram channels for community support and engagement.'
+      question: 'Is the program suitable for women?',
+      answer: 'Absolutely! The Grind Academy welcomes students of all genders and is committed to providing an inclusive and supportive environment for everyone. Our programs are designed to empower every individual, regardless of gender, to achieve financial independence and success.'
     },
     {
-      question: 'How does the subscription work?',
-      answer: 'We offer flexible subscription plans to suit your needs: monthly, 3-month, and yearly. You can choose your preferred plan on our Subscriptions Page. While auto-renewals are available for convenience, they are off by default. We will never automatically bill you without your explicit consent and securely store your payment details.'
+      question: 'How quickly will I make my money back?',
+      answer: 'While individual results can vary, many of our students report seeing a return on their investment within the first few months of completing the course. Our 30-day success guarantee is designed to help you start seeing results quickly.'
     },
     {
-      question: 'What if I don\'t find a course helpful?',
-      answer: 'We offer a money-back guarantee to ensure your satisfaction. If you are unhappy with a course, you are eligible for a refund according to our terms and conditions.'
+      question: 'Do I need money once I\'m inside The Grind Academy?',
+      answer: 'No additional fees are required after your initial subscription. All course materials and access to mentorship are included in your subscription fee. Many students on admission fall in love with our AI CAMPUS and other business models which require no start up Money & saw great success.'
     },
     {
-      question: 'How can I contact Grind Academy for support?',
-      answer: 'We have a dedicated Help Page with FAQs and a contact form for any queries or assistance you may need. Our team is committed to providing excellent support throughout your learning journey.'
+      question: 'Does my age really not matter?',
+      answer: 'Absolutely not, although we do advise individuals below 18 to talk it over with a parent or guardian prior to enrolling in The Grind Academy. Rather than spending on the latest video games that lose their charm in no time, you have the chance to become part of our community, kickstart your own venture, and leave your friends and family in awe as you elevate your life in tangible ways.'
     },
     {
-      question: 'Is my personal information safe with Grind Academy?',
-      answer: 'Absolutely! We prioritize the security and privacy of your data.We use robust security measures and encryption protocols to protect your personal information from unauthorized access.Your information is handled in strict compliance with our privacy policy.'
+      question: 'I know nothing about the skills you teach. Is it a problem?',
+      answer: 'Absolutely not. Remember, this is a mentorship program, designed for learning and growth. Simply adhere to our comprehensive lessons and expert advice, and you\'ll be on your way to establishing a lucrative venture.'
+    },
+    {
+      question: 'I don\'t have a lot of time available, can I still join?',
+      answer: 'Yes, you can! Our courses are designed to accommodate busy schedules, allowing you to learn at your own pace. While faster progress can be made with more time investment, even students with limited time can achieve substantial results by consistently dedicating as low as 30 minutes a day.'
     }
   ]
 

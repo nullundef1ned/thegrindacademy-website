@@ -20,7 +20,7 @@ export default function CertificateSection() {
             </span>
           </h2>
           <p className='text-accent text-center' data-aos='fade-up' data-aos-delay={initialDelay}>
-            Get your questions answered and gain insights directly from experienced instructors in real time
+            This credential distinguishes you as a leader and innovator within your field, enhancing your credibility and visibility. With our certification, you can showcase your advanced skills, opening doors to new opportunities and achieving recognition from peers and employers alike. Position yourself as a certified expert and elevate your professional status.
           </p>
         </div>
       </div>

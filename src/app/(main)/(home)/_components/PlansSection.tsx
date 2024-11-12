@@ -16,16 +16,19 @@ export default function PlansSection() {
   const plans = [
     {
       name: 'Month',
-      price: 10000,
-      description: 'Access to all courses and resources',
+      price: 30000,
+      description: '',
       features: [
-        'All the benefits of the Three month Plan',
+        'Access to multiple wealth creation skills',
+        '30 Day Wealth Accelerator challenge',
+        'Access to private community',
+        'Direct access to millionaire mentors'
       ],
       deal: false
     },
     {
       name: 'Three Months',
-      price: 23000,
+      price: 75000,
       description: 'Access to all courses and resources',
       features: [
         'Unlimited access to all courses',
@@ -37,7 +40,7 @@ export default function PlansSection() {
     },
     {
       name: 'Year',
-      price: 390000,
+      price: 300000,
       description: 'Access to all courses and resources',
       features: [
         'All the benefits of the Three month Plan',
@@ -112,11 +115,10 @@ export default function PlansSection() {
           <div className='absolute -top-0.5 -right-0.5 size-1 bg-[#353D50]' />
           <div className='absolute -bottom-0.5 -left-0.5 size-1 bg-[#353D50]' />
           <div className='absolute -bottom-0.5 -right-0.5 size-1 bg-[#353D50]' />
-          <p className='font-medium text-lg group-hover:hidden transition-all duration-300'>Or do nothing 🤷🏽‍♂️</p>
-          <p className='font-medium text-lg group-hover:block hidden transition-all duration-300'>Start something today ✅</p>
-          <p className='text-primary-100 text-sm group-hover:hidden transition-all duration-300'>And watch netflix all day</p>
-          <p className='text-primary-100 text-sm group-hover:block hidden transition-all duration-300'>Get subscribed today 🚀</p>
-          <Button href='/subscription' size="sm" className='group-hover:block hidden transition-all duration-300 mt-4'>Get Started</Button>
+          <p className='font-medium text-xl group-hover:hidden transition-all duration-300'>Or do nothing 🤷🏽‍♂️</p>
+          <p className='font-medium text-lg text-center group-hover:block hidden transition-all duration-300'>I know you want more <br /> for yourself🫡</p>
+          <p className='text-primary-100 text-lg group-hover:hidden transition-all duration-300'>And watch netflix all day</p>
+          <Button href='/subscription' size="sm" className='group-hover:block hidden transition-all duration-300 mt-4'>Start Here</Button>
         </div>
       </div>
     </div>
