@@ -32,14 +32,14 @@ export default function AboutPage() {
               <h1 className='text-3xl lg:text-5xl font-gishaBold' data-aos='fade-right' data-aos-delay={initialDelay}>
                 Meet <span className='text-primary-200'>Dexter</span>, the Visionary behind The Grind Academy
               </h1>
-              <h5 className='text-accent' data-aos='fade-right' data-aos-delay={initialDelay + 200}>
+              <h5 className='text-accent' data-aos='fade-right' data-aos-delay={initialDelay}>
                 With a passion for empowering individuals through knowledge and skills, Dexter founded Grind Academy to provide accessible,
                 top-tier education to aspiring professionals worldwideWith a passion for empowering individuals through knowledge and skills
               </h5>
               <BrandBars containerClassName='-translate-x-[44%] w-[180%]' barClassName='!h-14 lg:!h-16' />
             </div>
           </div>
-          <div className='flex flex-col justify-center relative' data-aos='fade-left'>
+          <div className='flex flex-col justify-center relative' data-aos='fade-left' data-aos-delay={initialDelay}>
             <Blur className='absolute w-full h-40 translate-x-[44%]' />
             <div className='w-full border border-primary/10 bg-primary/10 p-4'>
               <div className="h-96 relative w-full">

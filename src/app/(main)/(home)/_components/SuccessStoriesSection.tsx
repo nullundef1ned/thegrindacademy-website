@@ -79,7 +79,7 @@ export default function SuccessStoriesSection() {
           <h2 className='text-3xl lg:text-5xl text-left font-gishaBold' data-aos='fade-right'>
             Student Success Stories
           </h2>
-          <p className='text-muted' data-aos='fade-right' data-aos-delay={initialDelay + 200}>
+          <p className='text-muted' data-aos='fade-right' data-aos-delay={initialDelay}>
             Hear from our students about how The Grind Academy transformed their learning journey and helped them achieve their goals
           </p>
         </div>

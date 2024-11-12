@@ -30,7 +30,7 @@ export default function CertificateSection() {
         </div>
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10 left-1/2 -translate-x-1/2 bg-white/10' />
       </div>
-      <Button href='/subscription' className='mx-auto' data-aos='fade-up' data-aos-delay={initialDelay + 400}>
+      <Button href='/subscription' className='mx-auto' data-aos='fade-up' data-aos-delay={initialDelay}>
         Get Started
       </Button>
     </div>

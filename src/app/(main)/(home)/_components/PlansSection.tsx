@@ -103,7 +103,7 @@ export default function PlansSection() {
         ))}
       </div>
       <div
-        data-aos='fade-down' data-aos-delay={initialDelay + 400}
+        data-aos='fade-down' data-aos-delay={initialDelay}
         className='w-full flex flex-col items-center space-y-3 !mt-3'>
         <Image src="/images/dna.svg" width={60} height={60} alt='Do nothing arrow' />
         <div

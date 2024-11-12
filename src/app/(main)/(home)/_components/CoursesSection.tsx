@@ -73,7 +73,7 @@ export default function CoursesSection() {
           </Link>
         ))}
       </div>
-      <Button href='/courses' variant='outline' className='mx-auto' data-aos='fade-up' data-aos-delay={initialDelay + 400}>
+      <Button href='/courses' variant='outline' className='mx-auto' data-aos='fade-up' data-aos-delay={initialDelay + 200}>
         View All Courses
       </Button>
     </div>

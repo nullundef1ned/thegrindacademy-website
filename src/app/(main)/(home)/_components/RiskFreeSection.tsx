@@ -19,7 +19,7 @@ export default function RiskFreeSection() {
           data-aos='fade-up'
         />
         <h1 className='text-4xl font-gishaBold text-center' data-aos='fade-up' data-aos-delay={initialDelay}>Risk Free Learning</h1>
-        <p className='text-center text-muted' data-aos='fade-up' data-aos-delay={initialDelay + 200}>We&apos;re confident you&apos;ll love our courses. If you&apos;re not satisfied, we offer a 14-day money-back guarantee on all subscriptions</p>
+        <p className='text-center text-muted' data-aos='fade-up' data-aos-delay={initialDelay}>We&apos;re confident you&apos;ll love our courses. If you&apos;re not satisfied, we offer a 14-day money-back guarantee on all subscriptions</p>
       </div>
     </div>
   )
