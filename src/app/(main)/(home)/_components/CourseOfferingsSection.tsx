@@ -9,18 +9,18 @@ export default function CourseOfferingsSection() {
   const offerings = [
     {
       icon: 'ri:vip-crown-fill',
-      title: 'Build Skills for the future',
-      description: 'Learn cutting-edge techniques, work on high-impact projects, and unlock opportunities that will take your career to the next level. Gain the confidence to grow and scale your business.',
+      title: '30 day wealth accelerator',
+      description: 'Receive personalized, one-on-one mentorship at every step & Rapidly scale to 7 figure months with our world-class, plug-and-play content designed for immediate results.',
     },
     {
       icon: 'ri:vip-crown-fill',
-      title: 'Build Skills for the future',
-      description: 'Learn cutting-edge techniques, work on high-impact projects, and unlock opportunities that will take your career to the next level. Gain the confidence to grow and scale your business.',
+      title: 'Join an exclusive community',
+      description: 'Celebrate your achievements in a private network of peers who truly understand and support your journey. Connect with Like-Minded Individuals & Network with Over a thousand Members.',
     },
     {
       icon: 'ri:vip-crown-fill',
-      title: 'Build Skills for the future',
-      description: 'Learn cutting-edge techniques, work on high-impact projects, and unlock opportunities that will take your career to the next level. Gain the confidence to grow and scale your business.',
+      title: 'Traditional Education Keeps You Tied Down—We Set You Free.',
+      description: 'Imagine direct access to multimillionaire mentors ready to provide a clear, step-by-step blueprint to fast-track your success… That\'s precisely what awaits you at The Grind Academy.',
     },
   ]
 
