@@ -20,8 +20,8 @@ export default function Home() {
       <CoursesSection />
       <TestimonialSection />
       <InfoSection />
-      <PlansSection />
       <RiskFreeSection />
+      <PlansSection />
       <SuccessStoriesSection />
       <CertificateSection />
       <FAQSection />
