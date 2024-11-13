@@ -83,7 +83,7 @@ export default function CoursesPage() {
                     {course.description}
                   </p>
                 </div>
-                <Link href={`/courses/${course.slug}`} className='group text-primary-200 uppercase w-max'>
+                <Link href={`/c/${course.slug}`} className='group text-primary-200 uppercase w-max'>
                   <div className='flex items-center space-x-1'>
                     <p className='font-medium
                       '>
