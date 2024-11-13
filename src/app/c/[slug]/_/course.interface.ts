@@ -4,7 +4,7 @@ interface Lesson {
   duration: number;
 }
 
-interface Course {
+export interface Course {
   slug: string;
   title: string;
   shortDescription: string;

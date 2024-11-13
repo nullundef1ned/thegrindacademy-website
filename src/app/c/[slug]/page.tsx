@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { Course } from './_/course.interface';
 
 const course: Course = {
   slug: 'advanced-javascript-fundamentals',
@@ -85,7 +86,7 @@ export default function CoursePage() {
             <Blur className='absolute w-1/2 left-1/2 -translate-x-1/2 h-full' />
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4 h-80'>
               {course.images.map((image, index) => (
-                <div className='h-full object-cover p-3 border border-primary/10 rounded overflow-hidden bg-primary/10' data-aos='fade-up' data-aos-delay={initialDelay + 200 + (index * 100)}>
+                <div key={index} className='h-full object-cover p-3 border border-primary/10 rounded overflow-hidden bg-primary/10' data-aos='fade-up' data-aos-delay={initialDelay + 200 + (index * 100)}>
                   <div className='relative w-full h-full'>
                     <Image src={image} alt={`Course Image ${index + 1}`} className='object-cover' fill />
                   </div>

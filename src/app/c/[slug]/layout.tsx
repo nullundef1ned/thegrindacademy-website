@@ -1,6 +1,7 @@
 import Footer from '@/components/Footer'
 import { Metadata } from 'next/types'
 import React from 'react'
+import { Course } from './_/course.interface'
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const course: Course = {
