@@ -48,7 +48,7 @@ export default function CoursesSection() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full md:w-8/12 lg:w-11/12 mx-auto">
         {courses.map((course, index) => (
-          <Link key={index} href={`/courses/${course.slug}`} data-aos='fade-up' data-aos-delay={initialDelay + ((index + 1) * 200)}>
+          <Link key={index} href={`/c/${course.slug}`} data-aos='fade-up' data-aos-delay={initialDelay + ((index + 1) * 200)}>
             <div
               className='border rounded-[2px] p-6 relative radial-gradient from-[#00246B26] to-[#4B7DE026]'>
               <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />

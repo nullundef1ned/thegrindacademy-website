@@ -36,7 +36,7 @@ export default function CourseOfferingsSection() {
             </span>
           </h2>
           <p className='text-accent text-center' data-aos='fade-up' data-aos-delay={initialDelay}>
-            Access Top-Tier Learning Resources, Expert Guidance One-on-One, Scale Rapidly to 7 Figures/ Month
+            Access Top-Tier Learning Resources, Expert Guidance One-on-One, Scale Rapidly to 7 Figures/Month
           </p>
         </div>
       </div>
