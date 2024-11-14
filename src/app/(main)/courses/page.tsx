@@ -60,10 +60,10 @@ export default function CoursesPage() {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full md:w-8/12 lg:w-10/12 mx-auto">
+      <div data-aos='fade-up' data-aos-delay={initialDelay + 200} className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full md:w-8/12 lg:w-10/12 mx-auto">
         {courses.map((course, index) => (
           <div
-            key={index} data-aos='fade-up' data-aos-delay={initialDelay}
+            key={index}
             className={clsx(index % 3 === 0 ? 'col-span-1 lg:col-span-2' : 'col-span-1', 'border rounded-[2px] p-6 relative radial-gradient from-[#00246B26] to-[#4B7DE026]')}>
             <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />
             <div className='absolute -top-1.5 -right-1.5 size-3 bg-[#353D50]' />

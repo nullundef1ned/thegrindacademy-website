@@ -40,7 +40,7 @@ export default function TestimonialSection() {
   ]
 
   return (
-    <div id='testimonials' className='root-section !py-10 space-y-10'>
+    <div id='testimonials' className='root-section !py-32 space-y-10'>
       <div className='space-y-4'>
         <h2 className='text-4xl lg:text-5xl text-left font-gishaBold' data-aos='fade-up'>
           Our Students are {' '}

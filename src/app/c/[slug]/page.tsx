@@ -5,7 +5,7 @@ import IconifyIcon from '@/components/IconifyIcon'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Course } from './_/course.interface';
 
 const course: Course = {
@@ -51,9 +51,10 @@ export default function CoursePage() {
   const enrollmentURL = `/subscription?c=${course.slug}`;
 
   return (
-    <main className='bg-background'>
-      <div className='relative root-section !py-20 space-y-32 flex flex-col items-center'>
-        <Link href='/' className='flex-shrink-0' data-aos='fade-up'>
+    <Fragment>
+      <div id='#' className='relative root-section !py-20 space-y-32 flex flex-col items-center'>
+        <Blur className='absolute w-1/2 mx-auto !bg-white/10 h-40 -translate-y-32' data-aos='fade-up' />
+        <Link href='/' className='flex-shrink-0 !mt-0' data-aos='fade-up'>
           <Image src='/logos/logo.svg' alt='The Grind Academy Logo' className='flex-shrink-0' width={268} height={66} />
         </Link>
         <div className='space-y-6 max-w-screen-lg p-4 flex flex-col items-center'>
@@ -74,7 +75,6 @@ export default function CoursePage() {
             <source src='/videos/landing-video.mp4' type='video/mp4' />
           </video>
         </div>
-        <Blur className='absolute w-1/2 mx-auto !bg-white/10 h-40 -translate-y-60 -z-10' data-aos='fade-up' />
       </div>
       <div className='bg-[#00246B33]'>
         <div className="relative root-section !py-10 space-y-10">
@@ -122,6 +122,6 @@ export default function CoursePage() {
           </div>
         </div>
       </div>
-    </main>
+    </Fragment>
   )
 }

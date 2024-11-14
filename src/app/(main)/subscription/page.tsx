@@ -65,12 +65,12 @@ export default function SubscriptionPage() {
   return (
     <div className='root-section !py-10 space-y-10 flex flex-col items-center'>
       <div className='w-full md:w-2/3 lg:w-1/3 flex flex-col space-y-10'>
-        <div className='space-y-2 flex flex-col items-center'>
+        <div className='space-y-2 flex flex-col items-center' data-aos='fade-up'>
           <p className='text-2xl font-gishaBold text-center'>Get started on your journey</p>
           <p className='text-base text-accent text-center'>Fill in the information needed below and select a plan to start Grinding</p>
         </div>
 
-        <form ref={form} onSubmit={handleSubmit} className='flex flex-col gap-4 w-full relative'>
+        <form ref={form} onSubmit={handleSubmit} className='flex flex-col gap-4 w-full relative' data-aos='fade-up'>
           <Blur className='absolute w-full h-full -z-10' />
           <Input type='text' required name='fullName' icon='ri:user-6-fill' placeholder='Full Name' />
           <Input type='email' required name='email' icon='ri:mail-fill' placeholder='Email Address' />
@@ -79,12 +79,14 @@ export default function SubscriptionPage() {
         </form>
 
         <div className='flex flex-col gap-4 w-full'>
-          <p className='font-gishaBold text-3xl text-center'>Select a plan</p>
+          <p className='font-gishaBold text-3xl text-center' data-aos='fade-up'>Select a plan</p>
           <div className='flex flex-col gap-4 relative'>
             <Blur className='absolute w-full h-full -z-10' />
             {plans.map((plan, index) => (
               <div
                 key={index}
+                data-aos='fade-up'
+                data-aos-delay={200}
                 onClick={() => handlePlanSelect(plan.name)}
                 className={clsx(selectedPlan === plan.name ? 'border-[#004DE894] bg-[#00246b5e]' : 'border-[#004DE838] bg-[#00246B29] hover:bg-[#00246b5e] hover:border-[#004DE894]', 'border cursor-pointer rounded p-4 flex items-center justify-between relative transition-all duration-300')}>
                 <div className='space-y-1'>
@@ -100,14 +102,14 @@ export default function SubscriptionPage() {
             ))}
           </div>
         </div>
-        <div className='space-y-1'>
+        <div className='space-y-1' data-aos='fade-up'>
           <div className='flex items-center gap-2'>
             <Checkbox id='auto-renewal' checked={autoRenewal} onCheckedChange={() => setAutoRenewal(!autoRenewal)} />
             <label htmlFor='auto-renewal' className='text-sm font-medium'>Enable auto-renewal for hassle-free access</label>
           </div>
           <p className='text-sm text-accent'>If enabled, you&apos;ll be asked to enter your card details during payment for automatic renewals</p>
         </div>
-        <Button onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
+        <Button onClick={() => form.current?.requestSubmit()} variant='default' data-aos='fade-up' className='w-max mx-auto'>Subscribe to the Grind</Button>
       </div>
     </div>
   )
