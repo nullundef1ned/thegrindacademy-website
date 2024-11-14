@@ -7,11 +7,9 @@ import BrandBars from '@/components/BrandBars';
 
 export default function Preloader() {
   const [loadPercentage, setLoadPercentage] = useState(0);
+  const [isDocumentLoaded, setIsDocumentLoaded] = useState(false);
 
   const intervalTime = 4000 / 100; // 4 seconds
-  // const timeBeforeNextLoad = 1000 * 60 * 5; // 5 minutes
-
-  // const lastLoadedTime = localStorage.getItem('lastLoadedTime');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,16 +41,22 @@ export default function Preloader() {
 
   const barLoadStyles = getBarLoadStyles(loadPercentage);
 
-  // if (lastLoadedTime && new Date().getTime() - new Date(lastLoadedTime).getTime() < timeBeforeNextLoad) return null;
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      setIsDocumentLoaded(document.readyState === 'complete');
+    }
+  }, []);
+
+  if (isDocumentLoaded) return null;
 
   if (loadPercentage === 130) return null;
 
   return (
-    <div className={clsx(loadPercentage == 120 && 'opacity-0 -z-50', 'fixed inset-0 bg-background z-50 flex flex-col items-center justify-center transition-opacity duration-700')}>
+    <div className={clsx((loadPercentage == 120 || isDocumentLoaded) && 'opacity-0 -z-50', 'fixed inset-0 bg-background z-50 flex flex-col items-center justify-center transition-opacity duration-700')}>
       <Image src='/logos/logo.svg' alt='The Grind Academy Logo' width={200} height={60} className={clsx(isLoaded && 'opacity-0', 'transition-opacity duration-700')} />
       <BrandBars containerClassName={clsx(isLoaded && 'opacity-0', 'w-64 mb-10 mt-20 transition-opacity duration-700')} barClassName={`!h-14 ${barLoadStyles}`} />
       {/* <p className={clsx(isLoaded && 'opacity-0', 'font-gishaBold text-xl transition-opacity duration-700')}>Your journey to success begins here</p> */}
-      <p className={clsx(isLoaded && 'opacity-0', 'transition-opacity duration-700')}>{loadPercentage > 100 ? 100 : loadPercentage}%</p>
+      {/* <p className={clsx(isLoaded && 'opacity-0', 'transition-opacity duration-700')}>{loadPercentage > 100 ? 100 : loadPercentage}%</p> */}
     </div>
   )
 }

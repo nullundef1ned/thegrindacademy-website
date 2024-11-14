@@ -73,7 +73,7 @@ export default function SuccessStoriesSection() {
   ]
 
   return (
-    <div id='interviews' className='root-section !py-10 space-y-10'>
+    <div id='interviews' className='root-section !py-32 space-y-10'>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 w-full'>
         <div className='space-y-4'>
           <h2 className='text-3xl lg:text-5xl text-left font-gishaBold' data-aos='fade-right'>

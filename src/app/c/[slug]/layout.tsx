@@ -66,7 +66,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 export default function CourseLayout({ children }: { children: React.ReactNode }) {
   return (
     <main className='bg-background'>
-      <div className='min-h-screen'>
+      <div className='min-h-screen relative'>
         {children}
       </div>
       <Footer />
