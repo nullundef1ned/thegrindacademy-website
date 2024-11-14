@@ -3,6 +3,7 @@
 import React, { Fragment, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 export default function RootTemplate({ children }: { children: React.ReactNode }) {
 
@@ -16,6 +17,7 @@ export default function RootTemplate({ children }: { children: React.ReactNode }
   return (
     <Fragment>
       {children}
+      <GoogleAnalytics trackPageViews />
     </Fragment>
   )
 }

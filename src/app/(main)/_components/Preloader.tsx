@@ -2,7 +2,7 @@
 
 import { clsx } from 'clsx';
 import Image from 'next/image'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BrandBars from '@/components/BrandBars';
 
 export default function Preloader() {
