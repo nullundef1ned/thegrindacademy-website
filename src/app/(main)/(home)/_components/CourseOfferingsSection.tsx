@@ -8,17 +8,17 @@ export default function CourseOfferingsSection() {
   const initialDelay = 300;
   const offerings = [
     {
-      icon: 'ri:vip-crown-fill',
+      icon: 'ri:rocket-fill',
       title: '30 day wealth accelerator',
       description: 'Receive personalized, one-on-one mentorship at every step & Rapidly scale to 7 figure months with our world-class, plug-and-play content designed for immediate results.',
     },
     {
-      icon: 'ri:vip-crown-fill',
+      icon: 'ri:global-fill',
       title: 'Join an exclusive community',
       description: 'Celebrate your achievements in a private network of peers who truly understand and support your journey. Connect with Like-Minded Individuals & Network with Over a thousand Members.',
     },
     {
-      icon: 'ri:vip-crown-fill',
+      icon: 'ri:compass-3-fill',
       title: 'Traditional Education Keeps You Tied Down—We Set You Free.',
       description: 'Imagine direct access to multimillionaire mentors ready to provide a clear, step-by-step blueprint to fast-track your success… That\'s precisely what awaits you at The Grind Academy.',
     },
