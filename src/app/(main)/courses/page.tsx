@@ -53,7 +53,7 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
           There are no courses available at the moment
         </p>
         <p className='text-accent text-center text-sm'>
-          It looks like we haven't added any courses here yet. Stay tuned — exciting learning opportunities are on the way!
+          It looks like we haven&apos;t added any courses here yet. Stay tuned — exciting learning opportunities are on the way!
         </p>
       </div>
     )
