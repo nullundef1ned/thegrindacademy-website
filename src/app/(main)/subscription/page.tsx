@@ -8,8 +8,31 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { event } from 'nextjs-google-analytics';
+import useAxios from '@/hooks/useAxios';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import pluralize from 'pluralize';
+import { ISubscriptionRequest, ISubscriptionPlan } from './_module/subscription.interface';
+import LoadingIcons from 'react-loading-icons';
 
-export default function SubscriptionPage() {
+export default function SubscriptionPage({ params }: { params: { courseId: string } }) {
+
+  const axiosHandler = useAxios();
+
+  const { data, isLoading, error, refetch } = useQuery<ISubscriptionPlan[]>({
+    queryKey: ['subscription-plans'],
+    queryFn: async () => {
+      return (await axiosHandler.get('website-content/subscription/plan')).data
+    },
+  })
+
+  const { mutate: createSubscription, isPending: createSubscriptionLoading, error: createSubscriptionError, isSuccess: createSubscriptionSuccess } = useMutation({
+    mutationFn: async (data: ISubscriptionRequest) => {
+      return (await axiosHandler.post('student/register', data)).data
+    },
+    onSuccess: (data) => {
+      window.open(data, '_blank');
+    }
+  })
 
   const { formatCurrency } = useCurrency();
 
@@ -20,7 +43,8 @@ export default function SubscriptionPage() {
 
   const handlePlanSelect = (plan: string) => {
     setSelectedPlan(plan);
-    event('subscription_plan_selected', { category: "Plan", label: plan });
+    const planName = data?.find(p => p.id === plan)?.name;
+    event('subscription_plan_selected', { category: "Plan", label: planName });
   }
 
   const toggleAutoRenewal = () => {
@@ -30,43 +54,58 @@ export default function SubscriptionPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const subscriptionPlanId = Number(selectedPlan);
+    if (!form.current || !subscriptionPlanId) return;
+
+    const formData = new FormData(form.current);
+
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
+    const email = formData.get('email') as string;
+    const telegramUserName = formData.get('telegramUserName') as string;
+    const referalCode = formData.get('referalCode') as string;
+
+    const payload: ISubscriptionRequest = {
+      firstName,
+      lastName,
+      email,
+      telegramUserName,
+      referalCode,
+      subscriptionPlanId,
+      autoRenewal,
+      courseId: params.courseId,
+    }
+
+    createSubscription(payload);
   }
 
-  const plans = [
-    {
-      name: 'Month',
-      price: 30000,
-      description: 'Access to multiple wealth creation skills',
-      features: [
-        'Access to multiple wealth creation skills',
-        '30 Day Wealth Accelerator challenge',
-        'Access to private community',
-        'Direct access to millionaire mentors'
-      ],
-      deal: false
-    },
-    {
-      name: 'Three Months',
-      price: 75000,
-      description: 'Access to all courses and resources',
-      features: [
-        'Unlimited access to all courses',
-        'Access to all resources',
-        '1-on-1 mentorship with the instructor',
-        'Certificate of completion',
-      ],
-      deal: true
-    },
-    {
-      name: 'Year',
-      price: 300000,
-      description: 'Access to all courses and resources',
-      features: [
-        'All the benefits of the Three month Plan',
-      ],
-      deal: false
-    }
-  ]
+  const generateFrequency = (plan: ISubscriptionPlan) => {
+    return `${plan.duration == 1 ? '' : plan.duration} ${pluralize(plan.frequency, plan.duration)}`
+  }
+
+  const plans = data || [];
+
+  if (error) {
+    return <div className='root-section !py-10 space-y-4 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+      <p className='text-2xl font-gishaBold text-center'>Uh oh!</p>
+      <p className='text-lg text-center'>Plans are not loading for some reason</p>
+      <Button size="sm" onClick={() => refetch()}>Reload</Button>
+    </div>
+  }
+
+  if (plans.length === 0 && !isLoading) {
+    return <div className='root-section !py-10 space-y-4 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+      <p className='text-2xl font-gishaBold text-center'>Registration is currently closed</p>
+      <p className='text-lg text-center'>Please check back soon</p>
+    </div>
+  }
+
+  if (createSubscriptionSuccess) {
+    return <div className='root-section !py-10 space-y-10 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+      <p className='text-2xl font-gishaBold text-center'>Success!</p>
+      <p className='text-lg text-center'>You will be redirected to the payment page shortly</p>
+    </div>
+  }
 
   return (
     <div className='root-section !py-10 space-y-10 flex flex-col items-center' data-aos='fade-up'>
@@ -78,9 +117,15 @@ export default function SubscriptionPage() {
 
         <form ref={form} onSubmit={handleSubmit} className='flex flex-col gap-4 w-full relative'>
           <Blur className='absolute w-full h-full -z-10' />
-          <Input type='text' required name='fullName' icon='ri:user-6-fill' placeholder='Full Name' />
+          <div className='grid grid-cols-2 gap-4'>
+            <Input type='text' required name='firstName' icon='ri:user-6-fill' placeholder='First Name' />
+            <Input type='text' required name='lastName' icon='ri:user-6-fill' placeholder='Last Name' />
+          </div>
           <Input type='email' required name='email' icon='ri:mail-fill' placeholder='Email Address' />
-          <Input type='text' required name='telegramUsername' icon='ri:telegram-fill' placeholder='Telegram Username' />
+          <div className='relative space-y-1.5'>
+            <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' icon='ri:telegram-fill' placeholder='Telegram Username' />
+            <p className='text-xs text-accent'>Enter your telegram username beginning with the @</p>
+          </div>
           <Input type='text' name='referalCode' icon='ri:share-fill' placeholder='Referal code' />
         </form>
 
@@ -91,19 +136,27 @@ export default function SubscriptionPage() {
             {plans.map((plan, index) => (
               <div
                 key={index}
-                onClick={() => handlePlanSelect(plan.name)}
-                className={clsx(selectedPlan === plan.name ? 'border-[#004DE894] bg-[#00246b5e]' : 'border-[#004DE838] bg-[#00246B29] hover:bg-[#00246b5e] hover:border-[#004DE894]', 'border cursor-pointer rounded p-4 flex items-center justify-between relative transition-all duration-300')}>
+                onClick={() => handlePlanSelect(plan.id)}
+                className={clsx(selectedPlan === plan.id ? 'border-[#004DE894] bg-[#00246b5e]' : 'border-[#004DE838] bg-[#00246B29] hover:bg-[#00246b5e] hover:border-[#004DE894]', 'border cursor-pointer rounded p-4 flex items-center justify-between relative transition-all duration-300')}>
                 <div className='space-y-1'>
-                  <p className='text-2xl font-gishaBold'>{formatCurrency(plan.price)} <span className='lowercase text-xs font-sans text-primary-100'>every {plan.name}</span></p>
-                  <p className='text-sm text-accent'>{plan.description}</p>
+                  <p className='text-2xl font-gishaBold'>{formatCurrency(plan.price)} <span className='lowercase text-xs font-sans text-primary-100'>every {generateFrequency(plan)}</span></p>
+                  {/* <p className='text-sm text-accent'>{plan.description}</p> */}
                 </div>
-                {plan.deal &&
-                  <div className='bg-primary/80 rounded px-2 py-1 h-max'>
-                    <p className='text-sm font-medium'>Best Deal</p>
-                  </div>
-                }
+                <div className='flex items-center gap-4'>
+                  {plan.isDeal &&
+                    <div className='bg-primary/80 rounded px-2 py-1 h-max'>
+                      <p className='text-[10px] font-medium'>Best Deal</p>
+                    </div>
+                  }
+                  <Checkbox id={`${plan.name}-checkbox`} className='rounded-full' checked={selectedPlan === plan.id} />
+                </div>
               </div>
             ))}
+            {(isLoading && plans.length === 0) &&
+              <div className='w-full h-[30vh] flex items-center justify-center'>
+                <LoadingIcons.TailSpin stroke="#004DE8" />
+              </div>
+            }
           </div>
         </div>
         <div className='space-y-1'>
@@ -113,7 +166,10 @@ export default function SubscriptionPage() {
           </div>
           <p className='text-sm text-accent'>If enabled, you&apos;ll be asked to enter your card details during payment for automatic renewals</p>
         </div>
-        <Button onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
+        <div className='flex flex-col gap-4'>
+          <Button disabled={!selectedPlan} loading={createSubscriptionLoading} onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
+          {createSubscriptionError && <p className='text-sm text-destructive text-center'>{createSubscriptionError.message}</p>}
+        </div>
       </div>
     </div>
   )

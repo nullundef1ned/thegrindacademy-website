@@ -10,7 +10,6 @@ export default function Preloader() {
   const [isDocumentLoaded, setIsDocumentLoaded] = useState(false);
 
   const intervalTime = 4000 / 100; // 4 seconds
-  const thirtyMinutes = 30 * 60 * 1000;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,6 +44,8 @@ export default function Preloader() {
   const barLoadStyles = getBarLoadStyles(loadPercentage);
 
   useEffect(() => {
+    const thirtyMinutes = 30 * 60 * 1000;
+
     if (typeof document !== 'undefined') {
       const lastLoadedTime = localStorage.getItem('lastLoadedTime');
       if (lastLoadedTime) {

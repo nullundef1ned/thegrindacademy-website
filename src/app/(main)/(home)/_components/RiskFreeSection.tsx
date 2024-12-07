@@ -10,7 +10,7 @@ export default function RiskFreeSection() {
   return (
     <div className='root-section !py-10 grid place-items-center h-[100dvh] relative'>
       <Blur className='absolute w-1/2 h-1/2 -z-10' />
-      <div className='space-y-4 flex flex-col items-center w-2/3 md:w-1/2 mx-auto'>
+      <div className='space-y-4 flex flex-col items-center w-full md:w-1/2 mx-auto'>
         <Image
           className='animate-hover-bounce'
           src='/images/money-sack.svg'
