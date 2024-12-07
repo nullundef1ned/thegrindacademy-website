@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/utils/helper.util"
 import Link from "next/link"
+import LoadingIcons from "react-loading-icons"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[2px] text-xs font-semibold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 uppercase",
@@ -14,7 +15,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-accent text-accent bg-background hover:border-muted hover:text-muted",
+          "border border-accent text-accent bg-transparent hover:border-muted hover:text-muted",
         secondary:
           "bg-[#00246B80] border border-[#002F8C9C] text-primary-50 hover:bg-[#00246B9C]",
         ghost: "hover:bg-accent hover:text-accent-foreground",
@@ -40,10 +41,11 @@ export interface ButtonProps
   href?: string;
   target?: string;
   asChild?: boolean
+  loading?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, href, target, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, href, target, loading = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
 
     if (href) {
@@ -53,7 +55,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
             {...props}
-          />
+          >
+            {loading ? <LoadingIcons.TailSpin stroke="#FFF" /> : children}
+          </Comp>
         </Link>
       )
     }
@@ -63,7 +67,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {loading ? <LoadingIcons.TailSpin stroke="#FFF" /> : children}
+      </Comp>
     )
   }
 )

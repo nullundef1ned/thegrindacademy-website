@@ -1,14 +1,14 @@
 import { twMerge } from "tailwind-merge";
 import { type ClassValue, clsx } from "clsx";
-import { formatPhoneNumberIntl, isValidPhoneNumber } from "react-phone-number-input"
+// import { formatPhoneNumberIntl, isValidPhoneNumber } from "react-phone-number-input"
 
-const formatPhoneNumber = (phoneNumber: string): string => {
-  if (!isValidPhoneNumber(phoneNumber)) {
-    return ''
-  }
+// const formatPhoneNumber = (phoneNumber: string): string => {
+//   if (!isValidPhoneNumber(phoneNumber)) {
+//     return ''
+//   }
 
-  return formatPhoneNumberIntl(phoneNumber).replace(' ', '-').replaceAll(' ', '')
-}
+//   return formatPhoneNumberIntl(phoneNumber).replace(' ', '-').replaceAll(' ', '')
+// }
 
 const formatDate = (date: string): string => {
   const dateTime = new Date(date);
@@ -85,6 +85,6 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
-const helperUtil = { formatPhoneNumber, getTimeDelta, formatDate, formatTime, capitalize, downloadFile, convertToNumber }
+const helperUtil = { getTimeDelta, formatDate, formatTime, capitalize, downloadFile, convertToNumber }
 
 export default helperUtil

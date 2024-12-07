@@ -2,7 +2,7 @@ import { Metadata } from 'next/types'
 import React, { Fragment } from 'react'
 
 export const metadata: Metadata = {
-  title: 'Courses | The Grind Academy',
+  title: 'Courses',
   description: 'Courses at The Grind Academy',
 }
 

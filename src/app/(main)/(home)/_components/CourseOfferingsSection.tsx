@@ -5,7 +5,7 @@ import Blur from '@/components/Blur';
 import IconifyIcon from '@/components/IconifyIcon';
 
 export default function CourseOfferingsSection() {
-  const initialDelay = 300;
+  const initialDelay = 300;  
   const offerings = [
     {
       icon: 'ri:rocket-fill',
@@ -46,13 +46,13 @@ export default function CourseOfferingsSection() {
             key={index}
             data-aos='fade-up'
             data-aos-delay={initialDelay + ((index + 1) * 200)}
-            className='border p-6 space-y-6 rounded radial-gradient from-[#00246B26] to-[#4B7DE026]'>
+            className='border flex flex-col items-center p-6 space-y-6 rounded radial-gradient from-[#00246B26] to-[#4B7DE026]'>
             <div className='rounded p-2 grid place-items-center radial-gradient from-[#00246B26] to-[#4B7DE026] size-10 border'>
               <IconifyIcon icon={offering.icon} className='text-white' />
             </div>
-            <div className='space-y-2'>
-              <p className='text-xl font-gishaBold'>{offering.title}</p>
-              <p className='text-accent'>
+            <div className='space-y-2 w-full'>
+              <p className='text-xl font-gishaBold text-center'>{offering.title}</p>
+              <p className='text-accent text-center'>
                 {offering.description}
               </p>
             </div>

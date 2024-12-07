@@ -26,8 +26,8 @@ export default function LandingSection() {
           <BrandBars containerClassName='translate-x-[44%]' />
         </div>
       </div>
-      <div className='w-full border p-4 bg-primary/5' data-aos='fade-up' data-aos-delay={initialDelay}>
-        <video className='w-auto mx-auto h-[400px] lg:h-[500px] rounded-[2px] object-cover bg-primary-200/10' poster='/images/default-thumbnail.jpg' controls autoPlay muted loop>
+      <div className='w-full aspect-video border p-4 bg-black' data-aos='fade-up' data-aos-delay={initialDelay}>
+        <video className='w-auto mx-auto h-full rounded-[2px] object-cover bg-primary-200/10' poster='/images/default-thumbnail.jpg' controls playsInline muted loop>
           <source src='https://firebasestorage.googleapis.com/v0/b/suya-truck.appspot.com/o/Zahn%20Studios%2Fdammer-coffee.mp4?alt=media&token=437793d0-bd66-4544-aa6c-c7eee601cb02' type='video/mp4' />
         </video>
       </div>

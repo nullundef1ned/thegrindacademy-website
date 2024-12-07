@@ -7,11 +7,26 @@ import { usePathname } from 'next/navigation';
 import React, { useState } from 'react'
 import { Button } from './ui/button';
 import IconifyIcon from './IconifyIcon';
+import { useQuery } from '@tanstack/react-query';
+import { IStudentInterview, ITestimonial } from '@/app/_module/app.interfaces';
 
 export default function Header() {
   const [mobileNavigation, setMobileNavigation] = useState(false);
 
   const pathname = usePathname();
+  const testimonialsQuery = useQuery<ITestimonial[]>({
+    queryKey: ['testimonials'],
+  });
+
+  const interviewsQuery = useQuery<IStudentInterview[]>({
+    queryKey: ['interviews'],
+  });
+
+  const testimonials = testimonialsQuery?.data || [];
+  const interviews = interviewsQuery?.data || [];
+
+  const areThereTestimonials = testimonials.length > 0;
+  const areThereInterviews = interviews.length > 0;
 
   const navigation = [
     {
@@ -26,11 +41,11 @@ export default function Header() {
       name: 'Courses',
       href: '/courses',
     },
-    {
+    areThereTestimonials && {
       name: 'Testimonials',
       href: '/#testimonials',
     },
-    {
+    areThereInterviews && {
       name: 'Interviews',
       href: '/#interviews',
     },
@@ -38,12 +53,11 @@ export default function Header() {
       name: 'Subscription',
       href: '/subscription',
     }
-  ]
+  ].filter(Boolean) as { name: string; href: string }[];
 
   const closeMobileNavigation = () => {
     setMobileNavigation(false);
   }
-
 
   return (
     <header className={clsx(mobileNavigation ? 'h-[100dvh] overflow-hidden fixed left-0 bg-background' : 'bg-background/30 sticky backdrop-blur-lg',

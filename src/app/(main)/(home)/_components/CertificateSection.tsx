@@ -24,13 +24,16 @@ export default function CertificateSection() {
           </p>
         </div>
       </div>
-      <div className="w-full bg-[#00246B14] rounded p-10 relative overflow-hidden h-[80dvh]">
+      <div className="w-full bg-[#00246B14] rounded p-10 relative overflow-hidden h-[22dvh] md:h-[40dvh] xl:h-[65dvh]">
         <div className='absolute w-full h-1/3 -translate-y-10'>
           <Image src='/images/grid.svg' alt='Grid' fill className='absolute w-full h-full object-cover' />
         </div>
+        <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-[95%] h-[90%]'>
+          <Image src='/images/certificate.svg' alt='Certificate' fill className='absolute w-full h-full object-contain object-bottom' />
+        </div>
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10 left-1/2 -translate-x-1/2 bg-white/10' />
       </div>
-      <Button href='/subscription' className='mx-auto' data-aos='fade-up' data-aos-delay={initialDelay}>
+      <Button href='/subscription' className='mx-auto'>
         Get Started
       </Button>
     </div>
