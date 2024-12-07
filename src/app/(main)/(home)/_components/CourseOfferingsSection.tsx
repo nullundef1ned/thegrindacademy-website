@@ -5,22 +5,22 @@ import Blur from '@/components/Blur';
 import IconifyIcon from '@/components/IconifyIcon';
 
 export default function CourseOfferingsSection() {
-  const initialDelay = 300;
+  const initialDelay = 300;  
   const offerings = [
     {
-      icon: 'ri:vip-crown-fill',
-      title: 'Build Skills for the future',
-      description: 'Learn cutting-edge techniques, work on high-impact projects, and unlock opportunities that will take your career to the next level. Gain the confidence to grow and scale your business.',
+      icon: 'ri:rocket-fill',
+      title: '30 day wealth accelerator',
+      description: 'Receive personalized, one-on-one mentorship at every step & Rapidly scale to 7 figure months with our world-class, plug-and-play content designed for immediate results.',
     },
     {
-      icon: 'ri:vip-crown-fill',
-      title: 'Build Skills for the future',
-      description: 'Learn cutting-edge techniques, work on high-impact projects, and unlock opportunities that will take your career to the next level. Gain the confidence to grow and scale your business.',
+      icon: 'ri:global-fill',
+      title: 'Join an exclusive community',
+      description: 'Celebrate your achievements in a private network of peers who truly understand and support your journey. Connect with Like-Minded Individuals & Network with Over a thousand Members.',
     },
     {
-      icon: 'ri:vip-crown-fill',
-      title: 'Build Skills for the future',
-      description: 'Learn cutting-edge techniques, work on high-impact projects, and unlock opportunities that will take your career to the next level. Gain the confidence to grow and scale your business.',
+      icon: 'ri:compass-3-fill',
+      title: 'Traditional Education Keeps You Tied Down—We Set You Free.',
+      description: 'Imagine direct access to multimillionaire mentors ready to provide a clear, step-by-step blueprint to fast-track your success… That\'s precisely what awaits you at The Grind Academy.',
     },
   ]
 
@@ -30,13 +30,13 @@ export default function CourseOfferingsSection() {
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10' />
         <div className='space-y-4 md:w-1/2'>
           <h2 className='text-4xl lg:text-5xl text-center font-gishaBold' data-aos='fade-up'>
-            Transform Your Skills into {' '}
+            Unlock Financial Power in {' '}
             <span className='text-primary-200'>
-              Real Results
+              30 days
             </span>
           </h2>
           <p className='text-accent text-center' data-aos='fade-up' data-aos-delay={initialDelay}>
-            Unlock actionable strategies, scale your business, and get expert 1-on-1 guidance to accelerate your path to success.
+            Access Top-Tier Learning Resources, Expert Guidance One-on-One, Scale Rapidly to 7 Figures/Month
           </p>
         </div>
       </div>
@@ -46,13 +46,13 @@ export default function CourseOfferingsSection() {
             key={index}
             data-aos='fade-up'
             data-aos-delay={initialDelay + ((index + 1) * 200)}
-            className='border p-6 space-y-6 rounded radial-gradient from-[#00246B26] to-[#4B7DE026]'>
+            className='border flex flex-col items-center p-6 space-y-6 rounded radial-gradient from-[#00246B26] to-[#4B7DE026]'>
             <div className='rounded p-2 grid place-items-center radial-gradient from-[#00246B26] to-[#4B7DE026] size-10 border'>
               <IconifyIcon icon={offering.icon} className='text-white' />
             </div>
-            <div className='space-y-2'>
-              <p className='text-xl font-gishaBold'>{offering.title}</p>
-              <p className='text-accent'>
+            <div className='space-y-2 w-full'>
+              <p className='text-xl font-gishaBold text-center'>{offering.title}</p>
+              <p className='text-accent text-center'>
                 {offering.description}
               </p>
             </div>

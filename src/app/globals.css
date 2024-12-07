@@ -6,6 +6,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #0b152f inset;
+  box-shadow: 0 0 0 1000px #0b152f inset;
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  outline: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -16,11 +24,11 @@ body {
   }
 
   .root-section {
-    @apply root-padding max-w-screen-2xl mx-auto;
+    @apply root-padding max-w-screen-xl mx-auto;
   }
 
   .radial-gradient {
-    @apply bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] 
+    @apply bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))];
   }
 }
 
@@ -83,7 +91,7 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border scroll-smooth;
   }
 
   body {
@@ -94,5 +102,4 @@ body {
   a {
     @apply font-sans;
   }
-
 }

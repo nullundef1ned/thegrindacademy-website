@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import TitleProvider from "@/providers/title.provider";
 import { Analytics } from "@vercel/analytics/react";
+import environmentUtil from "@/utils/env.util";
+import { IMeta } from "./_module/app.interfaces";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,10 +27,38 @@ const gishaBold = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "The Grind Academy",
-  description: "The Grind Academy",
-};
+export const generateMetadata = async () => {
+  const response = await fetch(`${environmentUtil.API_URL}/website-content/meta`, {
+    cache: 'no-store'
+  });
+  const data = (await response.json()).data as IMeta;
+
+  const title = data.title || 'The Grind Academy';
+  const description = data.description || 'The Grind Academy';
+  const keywords = data.keywords?.split(',') || [];
+  const imageUrl = data.imageUrl || '';
+
+  return {
+    title: {
+      template: `%s | ${title}`,
+      default: title
+    },
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      keywords,
+      images: [imageUrl]
+    },
+    twitter: {
+      title,
+      description,
+      card: 'summary_large_image',
+      images: [imageUrl]
+    }
+  }
+}
 
 export default function RootLayout({
   children,
@@ -39,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gisha.variable} ${gishaBold.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gisha.variable} ${gishaBold.variable} antialiased bg-background`}
       >
         <TitleProvider>
           {children}
