@@ -1,9 +1,22 @@
+'use client';
+
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import IconifyIcon from './IconifyIcon'
+import { useQuery } from '@tanstack/react-query'
+import { IMeta } from '@/app/_module/app.interfaces'
+import useAxios from '@/hooks/useAxios'
 
 export default function Footer() {
+  const axiosHandler = useAxios();
+
+  const { data } = useQuery<IMeta>({
+    queryKey: ['meta'],
+    queryFn: async () => (await axiosHandler.get('/website-content/meta')).data
+  })
+
+  const meta = data || null;
+
   const quickLinks = [
     { name: 'Courses', href: '/courses' },
     { name: 'Subscription', href: '/subscription' },
@@ -16,11 +29,7 @@ export default function Footer() {
     { name: 'Privacy Policy', href: '/privacy-policy' },
   ]
 
-  const socialLinks = [
-    { name: 'Telegram', icon: 'ri:telegram-fill', href: 'https://t.me/thegrindacademy' },
-    { name: 'Instagram', icon: 'ri:instagram-fill', href: 'https://www.instagram.com/thegrindacademy' },
-    { name: 'Twitter', icon: 'ri:twitter-fill', href: 'https://x.com/thegrindacademy' },
-  ]
+  const socialLinks = meta?.socialMediaLinks || []
 
   return (
     <footer className='bg-[#12192866] border-t border-[#B0CAFF26] relative overflow-hidden'>
@@ -29,6 +38,10 @@ export default function Footer() {
           <Image src='/logos/secondary-logo.svg' alt='The Grind Academy Secondary Logo' width={160} height={70} />
         </Link>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 w-full md:w-auto">
+          {socialLinks.length == 0 && (
+            <div className="space-y-6">
+            </div>
+          )}
           <div className="space-y-6">
             <p className='text-primary-100 font-semibold'>Quick Links</p>
             <div className='space-y-4 flex flex-col'>
@@ -45,16 +58,18 @@ export default function Footer() {
               ))}
             </div>
           </div>
-          <div className="space-y-6">
-            <p className='text-primary-100 font-semibold'>Socials</p>
-            <div className='flex gap-4'>
-              {socialLinks.map((link, index) => (
-                <Link key={index} target='_blank' className='text-primary-200 hover:opacity-70 transition-opacity' href={link.href}>
-                  <IconifyIcon icon={link.icon} size={24} />
-                </Link>
-              ))}
+          {socialLinks.length > 0 && (
+            <div className="space-y-6">
+              <p className='text-primary-100 font-semibold'>Socials</p>
+              <div className='flex gap-4'>
+                {socialLinks.map((link, index) => (
+                  <Link key={index} target='_blank' className='text-primary-200 hover:opacity-70 transition-opacity' href={link.url}>
+                    <IconifyIcon icon={`ri:${link.type}-fill`} size={24} />
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className='absolute -bottom-16 left-1/2 -translate-x-1/2 w-full h-40'>

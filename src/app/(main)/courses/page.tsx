@@ -98,7 +98,7 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
                       {course.name}
                     </p>
                     <hr className='w-full' />
-                    <p className='text-accent'>
+                    <p className='text-accent line-clamp-2'>
                       {course.shortDescription}
                     </p>
                   </div>

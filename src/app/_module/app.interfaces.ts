@@ -7,6 +7,28 @@ export interface IPagination<T> {
   nextPage: number | null;
 }
 
+export interface ICourseMedia {
+  id: string;
+  courseId: string;
+  thumbnailUrl: string;
+  imageUrls: string[];
+  introVideoUrl: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ICourseLesson {
+  id: string;
+  courseId: string;
+  position: number;
+  description?: string;
+  title: string;
+  slug: string;
+  studyTimeInMinutes: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface ICourse {
   id: string;
   name: string;
@@ -18,15 +40,8 @@ export interface ICourse {
   isFeatured: boolean;
   createdAt: string;
   updatedAt: string;
-  media: {
-    id: string;
-    courseId: string;
-    thumbnailUrl: string;
-    imageUrls: string[];
-    introVideoUrl: string;
-    createdAt: string;
-    updatedAt: string;
-  }
+  media: ICourseMedia;
+  lessons: ICourseLesson[];
 }
 
 export interface IStudentInterview {
@@ -76,11 +91,18 @@ export interface IFAQ {
   updatedAt: string;
 }
 
+export interface ISocialMediaLink {
+  type: string;
+  url: string;
+}
+
 export interface IMeta {
   id: string;
   title: string;
   description: string;
   keywords: string;
+  supportEmail: string;
+  socialMediaLinks: ISocialMediaLink[];
   imageUrl: string;
   createdAt: string;
   updatedAt: string;

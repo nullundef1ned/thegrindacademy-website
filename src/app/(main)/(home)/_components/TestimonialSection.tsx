@@ -2,12 +2,10 @@
 
 import React from 'react'
 import Blur from '@/components/Blur'
-import Image from 'next/image';
-import { clsx } from 'clsx';
-import { motion } from 'framer-motion';
 import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { ITestimonial } from '@/app/_module/app.interfaces';
+import InfiniteScroll from '@/components/InfiniteScroll';
 
 export default function TestimonialSection() {
   const initialDelay = 300;
@@ -39,41 +37,7 @@ export default function TestimonialSection() {
 
       <div className='relative'>
         <Blur className='absolute w-1/2 h-1/2 translate-x-1/2 translate-y-1/2' />
-        <motion.div
-          className="flex gap-4 h-[450px] w-full overflow-hidden cursor-pointer"
-        >
-          <motion.div
-            className="flex gap-4"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 60,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-          >
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                data-aos='fade-right'
-                data-aos-delay={initialDelay + ((index + 1) * 200)}
-                className={clsx(index % 3 == 0 && 'md:row-span-2', 'flex-shrink-0 w-[450px] relative p-3 border border-primary/10 rounded overflow-hidden bg-primary/10')}>
-                <div className='relative w-full h-full'>
-                  <Image src={testimonial.imageUrl} alt={`${testimonial.id}-testimonial`} fill className='object-cover' />
-                </div>
-              </div>
-            ))}
-            {/* Duplicate items for seamless loop */}
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={`duplicate-${index}`}
-                className={clsx(index % 3 == 0 && 'md:row-span-2', 'flex-shrink-0 w-[400px] relative p-3 border border-primary/10 rounded overflow-hidden bg-primary/10')}>
-                <div className='relative w-full h-full'>
-                  <Image src={testimonial.imageUrl} alt={`${testimonial.id}-testimonial`} fill className='object-cover' />
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
+        <InfiniteScroll<ITestimonial> items={testimonials} imageKey='imageUrl' initialDelay={initialDelay} />
       </div>
     </div>
   )
