@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 
-interface IInfiniteScrollProps {
-  items: any[];
-  imageKey?: string;
+interface IInfiniteScrollProps<T> {
+  items: T[] | string[];
+  imageKey?: keyof T;
   height?: string;
   initialDelay: number;
 }
 
-export default function InfiniteScroll({ items, imageKey, height = '450px', initialDelay }: IInfiniteScrollProps) {
+export default function InfiniteScroll<T>({ items, imageKey, height = '450px', initialDelay }: IInfiniteScrollProps<T>) {
   return (
     <motion.div
       style={{ height }}
@@ -32,7 +32,7 @@ export default function InfiniteScroll({ items, imageKey, height = '450px', init
             data-aos-delay={initialDelay + ((index + 1) * 200)}
             className={clsx(index % 3 == 0 && 'md:row-span-2', 'flex-shrink-0 w-[450px] relative p-3 border border-primary/10 rounded overflow-hidden bg-primary/10')}>
             <div className='relative w-full h-full'>
-              <Image src={imageKey ? item[imageKey] : item} alt={`${index}-image`} fill className='object-cover' />
+              <Image src={(imageKey && typeof item === 'object' && item !== null) ? item[imageKey] as string : item as string} alt={`${index}-image`} fill className='object-cover' />
             </div>
           </div>
         ))}
@@ -42,7 +42,7 @@ export default function InfiniteScroll({ items, imageKey, height = '450px', init
             key={`duplicate-${index}`}
             className={clsx(index % 3 == 0 && 'md:row-span-2', 'flex-shrink-0 w-[400px] relative p-3 border border-primary/10 rounded overflow-hidden bg-primary/10')}>
             <div className='relative w-full h-full'>
-              <Image src={imageKey ? item[imageKey] : item} alt={`${index}-image`} fill className='object-cover' />
+              <Image src={(imageKey && typeof item === 'object' && item !== null) ? item[imageKey] as string : item as string} alt={`${index}-image`} fill className='object-cover' />
             </div>
           </div>
         ))}

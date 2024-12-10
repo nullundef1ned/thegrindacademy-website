@@ -2,9 +2,6 @@
 
 import React from 'react'
 import Blur from '@/components/Blur'
-import Image from 'next/image';
-import { clsx } from 'clsx';
-import { motion } from 'framer-motion';
 import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { ITestimonial } from '@/app/_module/app.interfaces';
@@ -40,7 +37,7 @@ export default function TestimonialSection() {
 
       <div className='relative'>
         <Blur className='absolute w-1/2 h-1/2 translate-x-1/2 translate-y-1/2' />
-        <InfiniteScroll items={testimonials} imageKey='imageUrl' initialDelay={initialDelay} />
+        <InfiniteScroll<ITestimonial> items={testimonials} imageKey='imageUrl' initialDelay={initialDelay} />
       </div>
     </div>
   )

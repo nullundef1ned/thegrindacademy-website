@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { Fragment } from 'react'
 import IconifyIcon from './IconifyIcon'
 import { useQuery } from '@tanstack/react-query'
 import { IMeta } from '@/app/_module/app.interfaces'
