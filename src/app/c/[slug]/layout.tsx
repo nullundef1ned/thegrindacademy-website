@@ -23,7 +23,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const course = (await response.json()).data as ICourse;
 
   return {
-    metadataBase: new URL(`https://thegrindacademy.co/c/${params.slug}`),
+    alternates: {
+      canonical: `/c/${params.slug}`,
+    },
     title: `${course.name} | The Grind Academy`,
     description: course.shortDescription,
     keywords: course.name,

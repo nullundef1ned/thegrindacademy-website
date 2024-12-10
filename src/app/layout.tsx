@@ -51,7 +51,9 @@ export const generateMetadata = async () => {
   const imageUrl = data?.imageUrl || '';
 
   return {
-    metadataBase: new URL(`https://thegrindacademy.co`),
+    alternates: {
+      canonical: '/',
+    },
     title: {
       template: `%s | ${title}`,
       default: title

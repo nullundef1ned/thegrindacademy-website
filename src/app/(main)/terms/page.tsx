@@ -4,6 +4,9 @@ import helperUtil from "@/utils/helper.util";
 import { Fragment } from "react";
 
 export const metadata = {
+  alternates: {
+    canonical: '/terms'
+  },
   title: 'Terms of Service',
   description: 'Terms of Service',
   openGraph: {
@@ -23,8 +26,8 @@ export default async function TermsPage() {
   });
   const data = (await response.json()).data as ITermsAndConditions;
 
-  const content = data.content || 'To be updated...';
-  const lastUpdated = data.updatedAt ? helperUtil.formatDate(data.updatedAt) : '';
+  const content = data?.content || 'To be updated...';
+  const lastUpdated = data?.updatedAt ? helperUtil.formatDate(data.updatedAt) : '';
 
   return (
     <Fragment>

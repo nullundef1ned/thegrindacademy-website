@@ -4,6 +4,9 @@ import helperUtil from "@/utils/helper.util";
 import { Fragment } from "react";
 
 export const metadata = {
+  alternates: {
+    canonical: '/privacy-policy',
+  },
   title: 'Privacy Policy',
   description: 'Privacy Policy',
   openGraph: {
@@ -23,8 +26,8 @@ export default async function PrivacyPolicyPage() {
   });
   const data = (await response.json()).data as IPrivacyPolicy;
 
-  const content = data.content || 'To be updated...';
-  const lastUpdated = data.updatedAt ? helperUtil.formatDate(data.updatedAt) : '';
+  const content = (data && data?.content) ? data.content : 'To be updated...';
+  const lastUpdated = (data && data?.updatedAt) ? helperUtil.formatDate(data.updatedAt) : '';
 
   return (
     <Fragment>

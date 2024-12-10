@@ -2,6 +2,9 @@ import { Metadata } from 'next/types'
 import React, { Fragment } from 'react'
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/about',
+  },
   title: 'About',
   description: 'About The Grind Academy',
   openGraph: {
