@@ -14,7 +14,7 @@ import pluralize from 'pluralize';
 import { ISubscriptionRequest, ISubscriptionPlan } from './_module/subscription.interface';
 import LoadingIcons from 'react-loading-icons';
 
-export default function SubscriptionPage({ params }: { params: { courseId: string } }) {
+export default function SubscriptionPage({ searchParams }: { searchParams: { "enrollment-course": string } }) {
 
   const axiosHandler = useAxios();
 
@@ -63,17 +63,17 @@ export default function SubscriptionPage({ params }: { params: { courseId: strin
     const lastName = formData.get('lastName') as string;
     const email = formData.get('email') as string;
     const telegramUserName = formData.get('telegramUserName') as string;
-    const referalCode = formData.get('referalCode') as string;
+    const referralCode = formData.get('referralCode') as string;
 
     const payload: ISubscriptionRequest = {
       firstName,
       lastName,
       email,
       telegramUserName,
-      referalCode,
+      referralCode,
       subscriptionPlanId,
       autoRenewal,
-      courseId: params.courseId,
+      courseSlug: searchParams['enrollment-course'],
     }
 
     createSubscription(payload);
@@ -126,7 +126,7 @@ export default function SubscriptionPage({ params }: { params: { courseId: strin
             <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' icon='ri:telegram-fill' placeholder='Telegram Username' />
             <p className='text-xs text-accent'>Enter your telegram username beginning with the @</p>
           </div>
-          <Input type='text' name='referalCode' icon='ri:share-fill' placeholder='Referal code' />
+          <Input type='text' name='referralCode' icon='ri:share-fill' placeholder='Referal code' />
         </form>
 
         <div className='flex flex-col gap-4 w-full'>
