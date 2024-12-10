@@ -4,6 +4,7 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import Blur from '@/components/Blur';
 import BrandBars from '@/components/BrandBars';
+import Video from '@/components/Video';
 
 export default function LandingSection() {
   const initialDelay = 300;
@@ -16,7 +17,7 @@ export default function LandingSection() {
             <h1 className='text-4xl text-center lg:text-left lg:text-6xl font-gishaBold' data-aos='fade-right' data-aos-delay={initialDelay}>
               Master the Skill of Making <span className='text-primary-200'>Money</span>
             </h1>
-            <h3 className='text-accent text-center lg:text-left' data-aos='fade-right' data-aos-delay={initialDelay}>
+            <h3 className='text-accent text-center lg:text-left font-gisha' data-aos='fade-right' data-aos-delay={initialDelay}>
               Where 90% Grind Meets 10% Talent.
             </h3>
           </div>
@@ -27,9 +28,10 @@ export default function LandingSection() {
         </div>
       </div>
       <div className='w-full aspect-video border p-4 bg-black' data-aos='fade-up' data-aos-delay={initialDelay}>
-        <video className='w-auto mx-auto h-full rounded-[2px] object-cover bg-primary-200/10' poster='/images/default-thumbnail.jpg' controls playsInline muted loop>
-          <source src='https://firebasestorage.googleapis.com/v0/b/suya-truck.appspot.com/o/Zahn%20Studios%2Fdammer-coffee.mp4?alt=media&token=437793d0-bd66-4544-aa6c-c7eee601cb02' type='video/mp4' />
-        </video>
+        <Video
+          src='https://firebasestorage.googleapis.com/v0/b/suya-truck.appspot.com/o/Zahn%20Studios%2Fdammer-coffee.mp4?alt=media&token=437793d0-bd66-4544-aa6c-c7eee601cb02'
+          poster='/images/default-thumbnail.jpg'
+        />
       </div>
       <div className="flex flex-wrap gap-4 justify-center !mt-10" data-aos='fade-up' data-aos-delay={initialDelay}>
         <Button variant='outline' href='/courses'>Explore our courses</Button>

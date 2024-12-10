@@ -31,14 +31,27 @@ export const generateMetadata = async () => {
   const response = await fetch(`${environmentUtil.API_URL}/website-content/meta`, {
     cache: 'no-store'
   });
-  const data = (await response.json()).data as IMeta;
 
-  const title = data.title || 'The Grind Academy';
-  const description = data.description || 'The Grind Academy';
-  const keywords = data.keywords?.split(',') || [];
-  const imageUrl = data.imageUrl || '';
+  let data: Partial<IMeta> = {
+    title: 'The Grind Academy',
+    description: 'The Grind Academy',
+    keywords: '',
+    imageUrl: ''
+  };
+
+  try {
+    data = (await response.json()).data as IMeta;
+  } catch (error) {
+    console.error(error);
+  }
+
+  const title = data?.title || 'The Grind Academy';
+  const description = data?.description || 'The Grind Academy';
+  const keywords = data?.keywords?.split(',') || [];
+  const imageUrl = data?.imageUrl || '';
 
   return {
+    metadataBase: new URL(`https://thegrindacademy.co`),
     title: {
       template: `%s | ${title}`,
       default: title
@@ -46,13 +59,19 @@ export const generateMetadata = async () => {
     description,
     keywords,
     openGraph: {
-      title,
+      title: {
+        template: `%s | ${title}`,
+        default: title
+      },
       description,
       keywords,
       images: [imageUrl]
     },
     twitter: {
-      title,
+      title: {
+        template: `%s | ${title}`,
+        default: title
+      },
       description,
       card: 'summary_large_image',
       images: [imageUrl]

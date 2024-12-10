@@ -27,8 +27,8 @@ export interface ISubscriptionRequest {
   lastName: string;
   email: string;
   telegramUserName: string;
-  referalCode: string;
+  referralCode: string;
   subscriptionPlanId: number;
   autoRenewal: boolean;
-  courseId?: string;
+  courseSlug?: string;
 }

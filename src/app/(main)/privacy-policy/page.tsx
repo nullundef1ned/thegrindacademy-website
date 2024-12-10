@@ -6,6 +6,14 @@ import { Fragment } from "react";
 export const metadata = {
   title: 'Privacy Policy',
   description: 'Privacy Policy',
+  openGraph: {
+    title: 'Privacy Policy',
+    description: 'Privacy Policy',
+  },
+  twitter: {
+    title: 'Privacy Policy',
+    description: 'Privacy Policy',
+  },
 }
 
 export default async function PrivacyPolicyPage() {

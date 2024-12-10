@@ -6,6 +6,14 @@ import { Fragment } from "react";
 export const metadata = {
   title: 'Terms of Service',
   description: 'Terms of Service',
+  openGraph: {
+    title: 'Terms of Service',
+    description: 'Terms of Service',
+  },
+  twitter: {
+    title: 'Terms of Service',
+    description: 'Terms of Service',
+  },
 }
 
 export default async function TermsPage() {

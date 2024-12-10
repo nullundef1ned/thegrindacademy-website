@@ -52,21 +52,21 @@ export default function CoursesSection() {
           {courses.map((course: ICourse, index: number) => (
             <Link key={index} href={`/c/${course.slug}`} data-aos='fade-up' data-aos-delay={initialDelay + ((index + 1) * 200)}>
               <div
-                className='border rounded-[2px] p-6 relative radial-gradient from-[#00246B26] to-[#4B7DE026]'>
+                className='border rounded-[2px] p-5 relative radial-gradient from-[#00246B26] to-[#4B7DE026]'>
                 <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />
                 <div className='absolute -top-1.5 -right-1.5 size-3 bg-[#353D50]' />
                 <div className='absolute -bottom-1.5 -left-1.5 size-3 bg-[#353D50]' />
                 <div className='absolute -bottom-1.5 -right-1.5 size-3 bg-[#353D50]' />
                 <div className="flex flex-col space-y-6">
-                  <div className='relative w-full h-80'>
+                  <div className='relative w-full h-60'>
                     <Image src={course.media.thumbnailUrl} alt={course.name} fill className='object-cover' />
                   </div>
                   <div className='flex flex-col space-y-4'>
-                    <p className='text-xl font-gishaBold'>
+                    <p className='text-xl font-gishaBold line-clamp-1'>
                       {course.name}
                     </p>
                     <hr className='w-full' />
-                    <p className='text-accent'>
+                    <p className='text-accent line-clamp-2'>
                       {course.shortDescription}
                     </p>
                   </div>

@@ -77,6 +77,12 @@ const downloadFile = (url: string, filename: string) => {
   document.body.removeChild(link);
 }
 
+const convertTimeToMinutesAndSeconds = (time: number): string => {
+  const minutes = Math.floor(time / 60) || 0;
+  const seconds = Math.floor(time % 60) || 0;
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
 const convertToNumber = (value: string | number): number => {
   return typeof value == 'string' ? parseFloat(value) : value;
 }
@@ -85,6 +91,6 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
-const helperUtil = { getTimeDelta, formatDate, formatTime, capitalize, downloadFile, convertToNumber }
+const helperUtil = { getTimeDelta, formatDate, formatTime, capitalize, downloadFile, convertTimeToMinutesAndSeconds, convertToNumber }
 
 export default helperUtil
