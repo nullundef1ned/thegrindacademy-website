@@ -62,7 +62,7 @@ export default function PlansSection() {
               <Image src='/logos/logomark.svg' width={40} height={40} alt='The Grind Logomark' />
               {plan.isDeal &&
                 <div className='bg-primary/80 rounded px-2 py-1'>
-                  <p className='text-sm font-medium'>Best Deal</p>
+                  <p className='text-sm font-medium whitespace-nowrap'>Best Deal</p>
                 </div>
               }
             </div>

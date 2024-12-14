@@ -145,7 +145,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
                 <div className='flex items-center gap-4'>
                   {plan.isDeal &&
                     <div className='bg-primary/80 rounded px-2 py-1 h-max'>
-                      <p className='text-[10px] font-medium'>Best Deal</p>
+                      <p className='text-[10px] font-medium whitespace-nowrap'>Best Deal</p>
                     </div>
                   }
                   <Checkbox id={`${plan.name}-checkbox`} className='rounded-full' checked={selectedPlan === plan.id} />
