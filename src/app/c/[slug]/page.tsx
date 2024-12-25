@@ -41,6 +41,25 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
     </div>
   );
 
+  if (!course) return (
+    <div className='root-section !py-20 space-y-32 flex flex-col items-center'>
+      <Blur className='absolute w-1/2 mx-auto !bg-white/10 h-40 -translate-y-32' data-aos='fade-up' />
+      <Link href='/' className='flex-shrink-0 !mt-0' data-aos='fade-up'>
+        <Image src='/logos/logo.svg' alt='The Grind Academy Logo' className='flex-shrink-0' width={268} height={66} />
+      </Link>
+      <div className='space-y-4 flex flex-col items-center h-[50dvh] justify-center'>
+        <Image src='/images/empty-state.svg' alt='Empty State' width={160} height={160} />
+        <p className='text-center text-xl font-semibold'>
+          We can&apos;t seem to find that one.
+        </p>
+        <p className='text-accent text-center text-sm'>
+          The course you are looking might have been removed or does not exist.
+        </p>
+        <Button size="sm" variant='secondary' href='/courses'>Check out some of our courses</Button>
+      </div>
+    </div>
+  );
+
   if (isError) return (
     <div className='root-section !py-20 space-y-32 h-full flex flex-col items-center'>
       <Blur className='absolute w-1/2 mx-auto !bg-white/10 h-40 -translate-y-32' data-aos='fade-up' />
@@ -56,24 +75,6 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
       </div>
     </div>
   )
-
-  if (!course) return (
-    <div className='root-section !py-20 space-y-32 flex flex-col items-center'>
-      <Blur className='absolute w-1/2 mx-auto !bg-white/10 h-40 -translate-y-32' data-aos='fade-up' />
-      <Link href='/' className='flex-shrink-0 !mt-0' data-aos='fade-up'>
-        <Image src='/logos/logo.svg' alt='The Grind Academy Logo' className='flex-shrink-0' width={268} height={66} />
-      </Link>
-      <div className='space-y-4 flex flex-col items-center h-[50dvh] justify-center'>
-        <Image src='/images/empty-state.svg' alt='Empty State' width={160} height={160} />
-        <p className='text-center text-xl font-semibold'>
-          We can&apos;t seem to find that one.
-        </p>
-        <p className='text-accent text-center text-sm'>
-          The course you are looking might have been removed or does not exist.
-        </p>
-      </div>
-    </div>
-  );
 
   const courseDuration = course.lessons.reduce((acc, lesson) => acc + lesson.studyTimeInMinutes, 0) || 0;
 

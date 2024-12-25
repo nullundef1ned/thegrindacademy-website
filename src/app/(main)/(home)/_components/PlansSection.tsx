@@ -67,7 +67,7 @@ export default function PlansSection() {
               }
             </div>
             <div className='space-y-2'>
-              <p className='text-3xl font-gishaBold'>{formatCurrency(plan.price)} <span className='lowercase text-xs font-sans'>every {generateFrequency(plan)}</span></p>
+              <p className='text-3xl font-gishaBold'>{formatCurrency(plan.price)} <span className='lowercase text-xs font-sans truncate'>every {generateFrequency(plan)}</span></p>
               {/* <p className='text-primary-100'>{plan.description}</p> */}
             </div>
             <div>
@@ -82,7 +82,7 @@ export default function PlansSection() {
               {plan.features.map((feature, index) => (
                 <div key={index} className='flex items-start gap-3'>
                   <IconifyIcon icon="ri:checkbox-circle-fill" className='text-primary-100 flex-shrink-0' />
-                  <p className='text-primary-100 text-sm'>{feature.content}</p>
+                  <p className='text-primary-100 text-sm'>{feature.feature.content}</p>
                 </div>
               ))}
               {plan.features.length == 0 &&
