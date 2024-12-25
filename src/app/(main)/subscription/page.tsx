@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import Blur from '@/components/Blur'
 import useCurrency from '@/hooks/useCurrency';
 import clsx from 'clsx';
@@ -13,12 +13,14 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import pluralize from 'pluralize';
 import { ISubscriptionRequest, ISubscriptionPlan } from './_module/subscription.interface';
 import LoadingIcons from 'react-loading-icons';
+import Image from 'next/image';
+import IconifyIcon from '@/components/IconifyIcon';
 
 export default function SubscriptionPage({ searchParams }: { searchParams: { "enrollment-course": string } }) {
 
   const axiosHandler = useAxios();
 
-  const { data, isLoading, error, refetch } = useQuery<ISubscriptionPlan[]>({
+  const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
     queryKey: ['subscription-plans'],
     queryFn: async () => {
       return (await axiosHandler.get('website-content/subscription/plan')).data
@@ -30,8 +32,17 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       return (await axiosHandler.post('student/register', data)).data
     },
     onSuccess: (data) => {
-      window.open(data, '_blank');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        window.open(data, '_blank');
+      }, 2000);
     }
+  })
+
+  const checkReferralCodeMutation = useMutation({
+    mutationFn: async (code: string) => {
+      return (await axiosHandler.get(`/website-content/referral/${code}`)).data
+    },
   })
 
   const { formatCurrency } = useCurrency();
@@ -83,27 +94,48 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     return `${plan.duration == 1 ? '' : plan.duration} ${pluralize(plan.frequency, plan.duration)}`
   }
 
+  const handleReferralCodeChange = (e: React.FocusEvent<HTMLInputElement>) => {
+    const code = e.target.value;
+    checkReferralCodeMutation.mutate(code);
+  }
+
+  console.log(checkReferralCodeMutation.data)
+
   const plans = data || [];
 
   if (error) {
-    return <div className='root-section !py-10 space-y-4 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
-      <p className='text-2xl font-gishaBold text-center'>Uh oh!</p>
-      <p className='text-lg text-center'>Plans are not loading for some reason</p>
-      <Button size="sm" onClick={() => refetch()}>Reload</Button>
+    return <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+      <Image src='/images/empty-folder.svg' alt='Error' width={100} height={100} />
+      <div className='space-y-2'>
+        <p className='text-2xl font-gishaBold text-center'>Oops! Something went wrong</p>
+        <p className='font-light text-center'>We couldn&apos;t load the subscription plans at the moment</p>
+      </div>
+      <Button size="sm" variant='secondary' loading={isRefetching} onClick={() => refetch()}>Reload Plans</Button>
     </div>
   }
 
   if (plans.length === 0 && !isLoading) {
-    return <div className='root-section !py-10 space-y-4 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
-      <p className='text-2xl font-gishaBold text-center'>Registration is currently closed</p>
-      <p className='text-lg text-center'>Please check back soon</p>
+    return <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+      <Image src='/images/registration-closed.svg' alt='Error' width={100} height={100} />
+
+      <div className='space-y-2'>
+        <p className='text-2xl font-gishaBold text-center'>Registration closed</p>
+        <p className='text-center font-light'>🚧 We&apos;re currently not accepting new subscriptions</p>
+      </div>
+      <hr className='border-primary-100/10 w-full' />
+      <div className='space-y-4 max-w-sm flex flex-col items-center'>
+        <p className='text-center font-light'>Thank you for your interest in joining us! Our subscription plans are temporarily unavailable as registration is closed.</p>
+        <Button size="sm" variant='secondary' href='/'>Go To Homepage</Button>
+      </div>
     </div>
   }
 
   if (createSubscriptionSuccess) {
-    return <div className='root-section !py-10 space-y-10 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
-      <p className='text-2xl font-gishaBold text-center'>Success!</p>
-      <p className='text-lg text-center'>You will be redirected to the payment page shortly</p>
+    return <div className='root-section !max-w-md !py-10 gap-6 flex flex-col items-center justify-center h-max mt-40 border border-[#B0CAFF1A]'>
+      <Image src='/images/account-creation.svg' alt='Error' width={100} height={100} />
+      <p className='text-xl font-gishaBold text-center'>Account Created Successfully 🎉 </p>
+      <p className='text-center font-light'>You&apos;re now one step closer to transforming your skills and achieving your goals.
+        You&apos;re being redirected to complete your subscription payment</p>
     </div>
   }
 
@@ -126,7 +158,29 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
             <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' icon='ri:telegram-fill' placeholder='Telegram Username' />
             <p className='text-xs text-accent'>Enter your telegram username beginning with the @</p>
           </div>
-          <Input type='text' name='referralCode' icon='ri:share-fill' placeholder='Referal code' />
+          <div className='flex flex-col gap-2'>
+            <Input type='text' name='referralCode' icon='ri:share-fill' placeholder='Referal code' onBlur={handleReferralCodeChange} />
+            <div className='flex items-center gap-2'>
+              {checkReferralCodeMutation.data &&
+                <Fragment>
+                  <IconifyIcon icon="ri:check-fill" className='text-green-500 flex items-center' />
+                  <p className='text-xs text-accent'>Referal code verified</p>
+                </Fragment>
+              }
+              {checkReferralCodeMutation.isPending &&
+                <Fragment>
+                  <LoadingIcons.TailSpin strokeWidth={2} height={15} width={15} />
+                  <p className='text-xs text-accent'>Verifying your referral code</p>
+                </Fragment>
+              }
+              {!checkReferralCodeMutation.data && checkReferralCodeMutation.isSuccess &&
+                <Fragment>
+                  <IconifyIcon icon="ri:close-fill" className='text-destructive flex items-center' />
+                  <p className='text-xs text-destructive'>Invalid referral code. Please check your code and try again</p>
+                </Fragment>
+              }
+            </div>
+          </div>
         </form>
 
         <div className='flex flex-col gap-4 w-full'>
@@ -145,7 +199,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
                 <div className='flex items-center gap-4'>
                   {plan.isDeal &&
                     <div className='bg-primary/80 rounded px-2 py-1 h-max'>
-                      <p className='text-[10px] font-medium'>Best Deal</p>
+                      <p className='text-[10px] font-medium whitespace-nowrap'>Best Deal</p>
                     </div>
                   }
                   <Checkbox id={`${plan.name}-checkbox`} className='rounded-full' checked={selectedPlan === plan.id} />

@@ -5,9 +5,21 @@ import { Button } from '@/components/ui/button'
 import Blur from '@/components/Blur';
 import BrandBars from '@/components/BrandBars';
 import Video from '@/components/Video';
+import { useQuery } from '@tanstack/react-query';
+import useAxios from '@/hooks/useAxios';
+import { IMeta } from '@/app/_module/app.interfaces';
 
 export default function LandingSection() {
   const initialDelay = 300;
+
+  const axiosHandler = useAxios();
+
+  const { data } = useQuery<IMeta>({
+    queryKey: ['meta'],
+    queryFn: async () => {
+      return (await axiosHandler.get('/website-content/meta')).data
+    },
+  })
 
   return (
     <div className='root-section !py-16 space-y-6'>
@@ -29,8 +41,9 @@ export default function LandingSection() {
       </div>
       <div className='w-full aspect-video border p-4 bg-black' data-aos='fade-up' data-aos-delay={initialDelay}>
         <Video
-          src='https://firebasestorage.googleapis.com/v0/b/suya-truck.appspot.com/o/Zahn%20Studios%2Fdammer-coffee.mp4?alt=media&token=437793d0-bd66-4544-aa6c-c7eee601cb02'
-          poster='/images/default-thumbnail.jpg'
+          autoPlay
+          src={data?.landingPageVideoUrl || ''}
+          poster={data?.landingPageThumbnailUrl || ''}
         />
       </div>
       <div className="flex flex-wrap gap-4 justify-center !mt-10" data-aos='fade-up' data-aos-delay={initialDelay}>

@@ -61,7 +61,7 @@ export default function Header() {
 
   return (
     <header className={clsx(mobileNavigation ? 'h-[100dvh] overflow-hidden fixed left-0 bg-background' : 'bg-background/30 sticky backdrop-blur-lg',
-      'border-b border-muted/10 w-full top-0 z-10')}>
+      'border-b border-muted/10 w-full top-0 z-30')}>
       <div className='flex items-center justify-between root-section'>
         <Link href='/' className='flex-shrink-0'>
           <Image src='/logos/logo.svg' alt='The Grind Academy Logo' className='flex-shrink-0' width={188} height={44} />
