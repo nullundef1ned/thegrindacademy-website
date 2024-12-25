@@ -1,8 +1,17 @@
+export interface IFeature {
+  id: string;
+  content: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+
+}
+
 export interface ISubscriptionPlanFeature {
   id: string;
   planId: string;
-  content: string;
-  label: string;
+  featureId: string;
+  feature: IFeature;
   createdAt: string;
   updatedAt: string;
 }

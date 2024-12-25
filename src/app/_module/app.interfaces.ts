@@ -102,6 +102,8 @@ export interface IMeta {
   description: string;
   keywords: string;
   supportEmail: string;
+  landingPageThumbnailUrl: string;
+  landingPageVideoUrl: string;
   socialMediaLinks: ISocialMediaLink[];
   imageUrl: string;
   createdAt: string;
