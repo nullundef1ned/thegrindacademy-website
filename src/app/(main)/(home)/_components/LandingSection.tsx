@@ -6,7 +6,6 @@ import Blur from '@/components/Blur';
 import BrandBars from '@/components/BrandBars';
 import Video from '@/components/Video';
 import { useQuery } from '@tanstack/react-query';
-import environmentUtil from '@/utils/env.util';
 import useAxios from '@/hooks/useAxios';
 import { IMeta } from '@/app/_module/app.interfaces';
 
@@ -15,7 +14,7 @@ export default function LandingSection() {
 
   const axiosHandler = useAxios();
 
-  const { data, isLoading, error } = useQuery<IMeta>({
+  const { data } = useQuery<IMeta>({
     queryKey: ['meta'],
     queryFn: async () => {
       return (await axiosHandler.get('/website-content/meta')).data
