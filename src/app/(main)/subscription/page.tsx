@@ -104,7 +104,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   const plans = data || [];
 
   if (error) {
-    return <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+    return <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]'>
       <Image src='/images/empty-folder.svg' alt='Error' width={100} height={100} />
       <div className='space-y-2'>
         <p className='text-2xl font-gishaBold text-center'>Oops! Something went wrong</p>
@@ -115,7 +115,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   }
 
   if (plans.length === 0 && !isLoading) {
-    return <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+    return <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]'>
       <Image src='/images/registration-closed.svg' alt='Error' width={100} height={100} />
 
       <div className='space-y-2'>
@@ -140,7 +140,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   }
 
   return (
-    <div className='root-section !py-10 space-y-10 flex flex-col items-center' data-aos='fade-up'>
+    <div className='root-section !py-10 space-y-10 flex flex-col items-center'>
       <div className='w-full md:w-2/3 lg:w-1/3 flex flex-col space-y-10'>
         <div className='space-y-2 flex flex-col items-center'>
           <p className='text-2xl font-gishaBold text-center'>Get started on your journey</p>

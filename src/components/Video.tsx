@@ -6,13 +6,14 @@ import { clsx } from 'clsx';
 interface IVideoProps {
   src: string;
   poster: string;
+  muted?: boolean;
   autoPlay?: boolean;
 }
 
-export default function Video({ src, poster, autoPlay = false }: IVideoProps) {
+export default function Video({ src, poster, autoPlay = false, muted = false }: IVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(muted);
   const [videoSpeed, setVideoSpeed] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [percentageWatched, setPercentageWatched] = useState(0);
@@ -121,7 +122,7 @@ export default function Video({ src, poster, autoPlay = false }: IVideoProps) {
         </div>
 
       </div>
-      <video poster={poster} preload='auto' className="object-contain !h-full w-full" controls={false} playsInline ref={videoRef} autoPlay={autoPlay}>
+      <video poster={poster} preload='auto' className="object-contain !h-full w-full" controls={false} muted={muted} playsInline ref={videoRef} autoPlay={autoPlay}>
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
