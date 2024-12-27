@@ -17,33 +17,6 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
   const data = (await response.json()).data as IPagination<ICourse>;
   const courses = data.result || [];
 
-  // const courses = [
-  //   {
-  //     thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  //     title: 'Business & Finance',
-  //     description: 'Learn the essential strategies to boost your online presence, drive traffic, and convert leads.',
-  //     slug: 'business-finance',
-  //   },
-  //   {
-  //     thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  //     title: 'Business & Finance',
-  //     description: 'Learn the essential strategies to boost your online presence, drive traffic, and convert leads.',
-  //     slug: 'business-finance',
-  //   },
-  //   {
-  //     thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  //     title: 'Business & Finance',
-  //     description: 'Learn the essential strategies to boost your online presence, drive traffic, and convert leads.',
-  //     slug: 'business-finance',
-  //   },
-  //   {
-  //     thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  //     title: 'Business & Finance',
-  //     description: 'Learn the essential strategies to boost your online presence, drive traffic, and convert leads.',
-  //     slug: 'business-finance',
-  //   },
-  // ]
-
   if (courses.length === 0) {
     return (
       <div className='relative !py-10 space-y-4 max-w-md mx-auto flex flex-col items-center justify-center h-[80dvh]'>
@@ -62,7 +35,7 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
   return (
     <div className='root-section !py-10 space-y-10 flex flex-col items-center'>
       <div className='flex items-center bg-[#004DE830] border border-[#3377FF6B] rounded-full px-6 py-3 w-max'>
-        <p className='text-sm text-primary-100'>All our courses comes with a certificate</p>
+        <p className='text-sm text-primary-100'>All our wealth creation methods comes with a certificate</p>
       </div>
       <div className='relative flex flex-col items-center'>
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10' />
@@ -70,11 +43,11 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
           <h2 className='text-4xl lg:text-5xl text-center font-gishaBold' data-aos='fade-up'>
             Explore Our {' '}
             <span className='text-primary-200'>
-              Courses
+              Wealth Creation Methods
             </span>
           </h2>
           <p className='text-accent text-center' data-aos='fade-up' data-aos-delay={initialDelay}>
-            Choose from a wide range of skill-building courses designed to elevate your expertise and unlock new opportunities
+            Choose from a wide range of skill-building wealth creation methods designed to elevate your expertise and unlock new opportunities
           </p>
         </div>
       </div>

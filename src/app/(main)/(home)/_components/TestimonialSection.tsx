@@ -6,6 +6,7 @@ import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { ITestimonial } from '@/app/_module/app.interfaces';
 import InfiniteScroll from '@/components/InfiniteScroll';
+import Image from 'next/image';
 
 export default function TestimonialSection() {
   const initialDelay = 300;
@@ -37,6 +38,15 @@ export default function TestimonialSection() {
 
       <div className='relative'>
         <Blur className='absolute w-1/2 h-1/2 translate-x-1/2 translate-y-1/2' />
+        <div className='grid md:hidden grid-cols-1 lg:grid-cols-3 gap-4'>
+          {testimonials.map((testimonial, index) => (
+            <div key={index} className="p-3 border border-primary/10 rounded overflow-hidden bg-primary/10">
+              <div className='relative w-full h-80'>
+                <Image src={testimonial.imageUrl} alt={testimonial.id} fill className='absolute w-full h-full object-cover' />
+              </div>
+            </div>
+          ))}
+        </div>
         <InfiniteScroll<ITestimonial> items={testimonials} imageKey='imageUrl' initialDelay={initialDelay} />
       </div>
     </div>

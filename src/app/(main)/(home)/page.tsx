@@ -18,9 +18,9 @@ export default function Home() {
       <LandingSection />
       <InfluencerSection />
       <CourseOfferingsSection />
+      <TestimonialSection />
       <CommunityInvitationSection />
       <CoursesSection />
-      <TestimonialSection />
       <DynamicContentSection />
       <RiskFreeSection />
       <PlansSection />

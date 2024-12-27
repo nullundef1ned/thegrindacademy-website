@@ -45,6 +45,12 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     },
   })
 
+  const validateTelegramUsernameMutation = useMutation({
+    mutationFn: async (username: string) => {
+      return (await axiosHandler.get(`/website-content/telegram/${username}`)).data
+    },
+  })
+
   const { formatCurrency } = useCurrency();
 
   const form = useRef<HTMLFormElement>(null);
@@ -63,7 +69,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     event('subscription_auto_renewal_toggled', { category: "Auto Renewal", label: autoRenewal ? "Enabled" : "Disabled" });
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const subscriptionPlanId = Number(selectedPlan);
     if (!form.current || !subscriptionPlanId) return;
@@ -87,6 +93,14 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       courseSlug: searchParams['enrollment-course'],
     }
 
+    if (referralCode) {
+      const referralCodeResponse = await checkReferralCodeMutation.mutateAsync(referralCode);
+      if (!referralCodeResponse) return alert('Invalid referral code');
+    }
+
+    const telegramUsernameResponse = await validateTelegramUsernameMutation.mutateAsync(telegramUserName);
+    if (telegramUsernameResponse) return alert('Telegram username already taken');
+
     createSubscription(payload);
   }
 
@@ -96,15 +110,22 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
 
   const handleReferralCodeChange = (e: React.FocusEvent<HTMLInputElement>) => {
     const code = e.target.value;
+    if (!code) return;
     checkReferralCodeMutation.mutate(code);
   }
 
-  console.log(checkReferralCodeMutation.data)
+  const handleTelegramUsernameChange = (e: React.FocusEvent<HTMLInputElement>) => {
+    validateTelegramUsernameMutation.reset();
+    const username = e.target.value;
+    if (!username) return;
+    validateTelegramUsernameMutation.mutate(username);
+  }
 
   const plans = data || [];
+  const disabled = !selectedPlan || validateTelegramUsernameMutation.data
 
   if (error) {
-    return <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+    return <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]'>
       <Image src='/images/empty-folder.svg' alt='Error' width={100} height={100} />
       <div className='space-y-2'>
         <p className='text-2xl font-gishaBold text-center'>Oops! Something went wrong</p>
@@ -115,7 +136,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   }
 
   if (plans.length === 0 && !isLoading) {
-    return <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
+    return <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]'>
       <Image src='/images/registration-closed.svg' alt='Error' width={100} height={100} />
 
       <div className='space-y-2'>
@@ -140,7 +161,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   }
 
   return (
-    <div className='root-section !py-10 space-y-10 flex flex-col items-center' data-aos='fade-up'>
+    <div className='root-section !py-10 space-y-10 flex flex-col items-center'>
       <div className='w-full md:w-2/3 lg:w-1/3 flex flex-col space-y-10'>
         <div className='space-y-2 flex flex-col items-center'>
           <p className='text-2xl font-gishaBold text-center'>Get started on your journey</p>
@@ -155,8 +176,34 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
           </div>
           <Input type='email' required name='email' icon='ri:mail-fill' placeholder='Email Address' />
           <div className='relative space-y-1.5'>
-            <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' icon='ri:telegram-fill' placeholder='Telegram Username' />
+            <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' onBlur={handleTelegramUsernameChange} icon='ri:telegram-fill' placeholder='Telegram Username' />
             <p className='text-xs text-accent'>Enter your telegram username beginning with the @</p>
+            <div className='flex items-center gap-2'>
+              {!validateTelegramUsernameMutation.data && validateTelegramUsernameMutation.isSuccess ?
+                <Fragment>
+                  <IconifyIcon icon="ri:check-fill" className='text-green-500 flex items-center' />
+                  <p className='text-xs text-accent'>Telegram username verified</p>
+                </Fragment>
+                :
+                <Fragment>
+                  {validateTelegramUsernameMutation.isPending ?
+                    <Fragment>
+                      <LoadingIcons.TailSpin strokeWidth={2} height={15} width={15} />
+                      <p className='text-xs text-accent'>Verifying your telegram username</p>
+                    </Fragment>
+                    :
+                    <Fragment>
+                      {validateTelegramUsernameMutation.data && validateTelegramUsernameMutation.isSuccess &&
+                        <Fragment>
+                          <IconifyIcon icon="ri:close-fill" className='text-destructive flex items-center' />
+                          <p className='text-xs text-destructive'>This username is already taken. Please try a different one</p>
+                        </Fragment>
+                      }
+                    </Fragment>
+                  }
+                </Fragment>
+              }
+            </div>
           </div>
           <div className='flex flex-col gap-2'>
             <Input type='text' name='referralCode' icon='ri:share-fill' placeholder='Referal code' onBlur={handleReferralCodeChange} />
@@ -221,7 +268,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
           <p className='text-sm text-accent'>If enabled, you&apos;ll be asked to enter your card details during payment for automatic renewals</p>
         </div>
         <div className='flex flex-col gap-4'>
-          <Button disabled={!selectedPlan} loading={createSubscriptionLoading} onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
+          <Button disabled={disabled} loading={createSubscriptionLoading} onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
           {createSubscriptionError && <p className='text-sm text-destructive text-center'>{createSubscriptionError.message}</p>}
         </div>
       </div>

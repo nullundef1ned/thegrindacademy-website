@@ -14,7 +14,7 @@ export default function InfiniteScroll<T>({ items, imageKey, height = '450px', i
   return (
     <motion.div
       style={{ height }}
-      className="flex gap-4 w-full overflow-hidden cursor-pointer"
+      className="hidden md:flex gap-4 w-full overflow-hidden cursor-pointer"
     >
       <motion.div
         className="flex gap-4"
