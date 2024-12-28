@@ -15,10 +15,13 @@ import { ISubscriptionRequest, ISubscriptionPlan } from './_module/subscription.
 import LoadingIcons from 'react-loading-icons';
 import Image from 'next/image';
 import IconifyIcon from '@/components/IconifyIcon';
+import Link from 'next/link';
 
 export default function SubscriptionPage({ searchParams }: { searchParams: { "enrollment-course": string } }) {
 
   const axiosHandler = useAxios();
+
+  const [paymentLink, setPaymentLink] = useState<string | null>(null);
 
   const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
     queryKey: ['subscription-plans'],
@@ -36,6 +39,9 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       setTimeout(() => {
         window.open(data, '_blank');
       }, 2000);
+      setTimeout(() => {
+        setPaymentLink(data);
+      }, 3000);
     }
   })
 
@@ -157,6 +163,9 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       <p className='text-xl font-gishaBold text-center'>Account Created Successfully 🎉 </p>
       <p className='text-center font-light'>You&apos;re now one step closer to transforming your skills and achieving your goals.
         You&apos;re being redirected to complete your subscription payment</p>
+      {paymentLink &&
+        <Link href={paymentLink} className='text-sm text-accent'>If you are not redirected, <span className='font-medium text-primary-100'>click here</span></Link>
+      }
     </div>
   }
 
