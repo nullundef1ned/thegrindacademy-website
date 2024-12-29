@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import Blur from '@/components/Blur'
 import useCurrency from '@/hooks/useCurrency';
 import clsx from 'clsx';
@@ -21,7 +21,13 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
 
   const axiosHandler = useAxios();
 
+  const form = useRef<HTMLFormElement>(null);
+
+  const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
+
+  const { formatCurrency } = useCurrency();
 
   const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
     queryKey: ['subscription-plans'],
@@ -30,12 +36,13 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     },
   })
 
-  const { mutate: createSubscription, isPending: createSubscriptionLoading, error: createSubscriptionError, isSuccess: createSubscriptionSuccess } = useMutation({
+  const createSubscriptionMutation = useMutation({
     mutationFn: async (data: ISubscriptionRequest) => {
       return (await axiosHandler.post('student/register', data)).data
     },
     onSuccess: (data) => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      localStorage.removeItem('referral');
       setTimeout(() => {
         window.open(data, '_blank');
       }, 2000);
@@ -56,13 +63,6 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       return (await axiosHandler.get(`/website-content/telegram/${username}`)).data
     },
   })
-
-  const { formatCurrency } = useCurrency();
-
-  const form = useRef<HTMLFormElement>(null);
-
-  const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   const handlePlanSelect = (plan: string) => {
     setSelectedPlan(plan);
@@ -107,7 +107,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     const telegramUsernameResponse = await validateTelegramUsernameMutation.mutateAsync(telegramUserName);
     if (telegramUsernameResponse) return alert('Telegram username already taken');
 
-    createSubscription(payload);
+    createSubscriptionMutation.mutate(payload);
   }
 
   const generateFrequency = (plan: ISubscriptionPlan) => {
@@ -130,43 +130,58 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   const plans = data || [];
   const disabled = !selectedPlan || validateTelegramUsernameMutation.data
 
+  useEffect(() => {
+    const referralCode = localStorage.getItem('referral');
+
+    if (referralCode) {
+      document.getElementsByName('referralCode')[0]?.setAttribute('value', referralCode);
+      checkReferralCodeMutation.mutate(referralCode);
+    }
+  }, []);
+
   if (error) {
-    return <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]'>
-      <Image src='/images/empty-folder.svg' alt='Error' width={100} height={100} />
-      <div className='space-y-2'>
-        <p className='text-2xl font-gishaBold text-center'>Oops! Something went wrong</p>
-        <p className='font-light text-center'>We couldn&apos;t load the subscription plans at the moment</p>
+    return (
+      <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]'>
+        <Image src='/images/empty-folder.svg' alt='Error' width={100} height={100} />
+        <div className='space-y-2'>
+          <p className='text-2xl font-gishaBold text-center'>Oops! Something went wrong</p>
+          <p className='font-light text-center'>We couldn&apos;t load the subscription plans at the moment</p>
+        </div>
+        <Button size="sm" variant='secondary' loading={isRefetching} onClick={() => refetch()}>Reload Plans</Button>
       </div>
-      <Button size="sm" variant='secondary' loading={isRefetching} onClick={() => refetch()}>Reload Plans</Button>
-    </div>
+    )
   }
 
   if (plans.length === 0 && !isLoading) {
-    return <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]'>
-      <Image src='/images/registration-closed.svg' alt='Error' width={100} height={100} />
+    return (
+      <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]'>
+        <Image src='/images/registration-closed.svg' alt='Error' width={100} height={100} />
 
-      <div className='space-y-2'>
-        <p className='text-2xl font-gishaBold text-center'>Registration closed</p>
-        <p className='text-center font-light'>🚧 We&apos;re currently not accepting new subscriptions</p>
+        <div className='space-y-2'>
+          <p className='text-2xl font-gishaBold text-center'>Registration closed</p>
+          <p className='text-center font-light'>🚧 We&apos;re currently not accepting new subscriptions</p>
+        </div>
+        <hr className='border-primary-100/10 w-full' />
+        <div className='space-y-4 max-w-sm flex flex-col items-center'>
+          <p className='text-center font-light'>Thank you for your interest in joining us! Our subscription plans are temporarily unavailable as registration is closed.</p>
+          <Button size="sm" variant='secondary' href='/'>Go To Homepage</Button>
+        </div>
       </div>
-      <hr className='border-primary-100/10 w-full' />
-      <div className='space-y-4 max-w-sm flex flex-col items-center'>
-        <p className='text-center font-light'>Thank you for your interest in joining us! Our subscription plans are temporarily unavailable as registration is closed.</p>
-        <Button size="sm" variant='secondary' href='/'>Go To Homepage</Button>
-      </div>
-    </div>
+    )
   }
 
-  if (createSubscriptionSuccess) {
-    return <div className='root-section !max-w-md !py-10 gap-6 flex flex-col items-center justify-center h-max mt-40 border border-[#B0CAFF1A]'>
-      <Image src='/images/account-creation.svg' alt='Error' width={100} height={100} />
-      <p className='text-xl font-gishaBold text-center'>Account Created Successfully 🎉 </p>
-      <p className='text-center font-light'>You&apos;re now one step closer to transforming your skills and achieving your goals.
-        You&apos;re being redirected to complete your subscription payment</p>
-      {paymentLink &&
-        <Link href={paymentLink} className='text-sm text-accent'>If you are not redirected, <span className='font-medium text-primary-100'>click here</span></Link>
-      }
-    </div>
+  if (createSubscriptionMutation.isSuccess) {
+    return (
+      <div className='root-section !max-w-md !py-10 gap-6 flex flex-col items-center justify-center h-max mt-40 border border-[#B0CAFF1A]'>
+        <Image src='/images/account-creation.svg' alt='Error' width={100} height={100} />
+        <p className='text-xl font-gishaBold text-center'>Account Created Successfully 🎉 </p>
+        <p className='text-center font-light'>You&apos;re now one step closer to transforming your skills and achieving your goals.
+          You&apos;re being redirected to complete your subscription payment</p>
+        {paymentLink &&
+          <Link href={paymentLink} className='text-sm text-accent'>If you are not redirected, <span className='font-medium text-primary-100'>click here</span></Link>
+        }
+      </div>
+    )
   }
 
   return (
@@ -277,8 +292,8 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
           <p className='text-sm text-accent'>If enabled, you&apos;ll be asked to enter your card details during payment for automatic renewals</p>
         </div>
         <div className='flex flex-col gap-4'>
-          <Button disabled={disabled} loading={createSubscriptionLoading} onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
-          {createSubscriptionError && <p className='text-sm text-destructive text-center'>{createSubscriptionError.message}</p>}
+          <Button disabled={disabled} loading={createSubscriptionMutation.isPending} onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
+          {createSubscriptionMutation.error && <p className='text-sm text-destructive text-center'>{createSubscriptionMutation.error.message}</p>}
         </div>
       </div>
     </div>
