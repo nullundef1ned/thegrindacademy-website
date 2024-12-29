@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, Suspense, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Hotjar from '@hotjar/browser';
@@ -11,7 +11,7 @@ import useURL from '@/hooks/useURL';
 
 export const queryClient = new QueryClient();
 
-export default function RootTemplate({ children }: { children: React.ReactNode }) {
+function RootTemplate({ children }: { children: React.ReactNode }) {
 
   const { searchParams } = useURL();
   const referralCode = searchParams?.get('referral') as string;
@@ -39,5 +39,16 @@ export default function RootTemplate({ children }: { children: React.ReactNode }
       </QueryClientProvider>
       <GoogleAnalytics trackPageViews />
     </Fragment>
+  )
+}
+
+
+export default function SuspenseWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense>
+      <RootTemplate>
+        {children}
+      </RootTemplate>
+    </Suspense>
   )
 }
