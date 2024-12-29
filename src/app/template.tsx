@@ -7,10 +7,18 @@ import Hotjar from '@hotjar/browser';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { GoogleAnalytics } from 'nextjs-google-analytics';
+import useURL from '@/hooks/useURL';
 
 export const queryClient = new QueryClient();
 
 export default function RootTemplate({ children }: { children: React.ReactNode }) {
+
+  const { searchParams } = useURL();
+  const referralCode = searchParams?.get('referral') as string;
+
+  useEffect(() => {
+    if (referralCode) localStorage.setItem('referral', referralCode);
+  }, [referralCode]);
 
   useEffect(() => {
     AOS.init({
