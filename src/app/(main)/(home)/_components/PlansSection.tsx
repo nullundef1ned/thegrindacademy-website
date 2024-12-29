@@ -85,9 +85,6 @@ export default function PlansSection() {
                   <p className='text-primary-100 text-sm'>{feature.feature.content}</p>
                 </div>
               ))}
-              {plan.features.length == 0 &&
-                <p className='text-primary-100 text-sm text-center'>Nothing but character development</p>
-              }
             </div>
             {plan.isDeal && <Blur className='absolute w-full h-full -translate-y-[150%] -z-10' />}
             {plan.isDeal && <Blur className='absolute w-full h-full -translate-y-[30%] -z-10' />}

@@ -74,7 +74,7 @@ export default function Header() {
           ))}
         </div>
         <div className='hidden lg:flex items-center gap-4'>
-          <Button href='https://app.thegrindacademy.com' target='_blank' variant='outline'>Log in</Button>
+          <Button href='https://app.thegrindacademy.co' target='_blank' variant='outline'>Log in</Button>
           <Button href='/subscription'>Sign up</Button>
         </div>
         <div onClick={() => setMobileNavigation(!mobileNavigation)} className='lg:hidden bg-[#00246B66] size-8 flex flex-col items-center justify-center rounded cursor-pointer'>

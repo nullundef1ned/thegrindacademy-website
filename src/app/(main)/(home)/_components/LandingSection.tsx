@@ -41,7 +41,6 @@ export default function LandingSection() {
       </div>
       <div className='w-full aspect-video border p-4 bg-black' data-aos='fade-up' data-aos-delay={initialDelay}>
         <Video
-          autoPlay
           src={data?.landingPageVideoUrl || ''}
           poster={data?.landingPageThumbnailUrl || ''}
         />

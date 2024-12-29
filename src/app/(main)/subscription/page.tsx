@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import Blur from '@/components/Blur'
 import useCurrency from '@/hooks/useCurrency';
 import clsx from 'clsx';
@@ -15,10 +15,19 @@ import { ISubscriptionRequest, ISubscriptionPlan } from './_module/subscription.
 import LoadingIcons from 'react-loading-icons';
 import Image from 'next/image';
 import IconifyIcon from '@/components/IconifyIcon';
+import Link from 'next/link';
 
 export default function SubscriptionPage({ searchParams }: { searchParams: { "enrollment-course": string } }) {
 
   const axiosHandler = useAxios();
+
+  const form = useRef<HTMLFormElement>(null);
+
+  const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [paymentLink, setPaymentLink] = useState<string | null>(null);
+
+  const { formatCurrency } = useCurrency();
 
   const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
     queryKey: ['subscription-plans'],
@@ -27,15 +36,19 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     },
   })
 
-  const { mutate: createSubscription, isPending: createSubscriptionLoading, error: createSubscriptionError, isSuccess: createSubscriptionSuccess } = useMutation({
+  const createSubscriptionMutation = useMutation({
     mutationFn: async (data: ISubscriptionRequest) => {
       return (await axiosHandler.post('student/register', data)).data
     },
     onSuccess: (data) => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      localStorage.removeItem('referral');
       setTimeout(() => {
         window.open(data, '_blank');
       }, 2000);
+      setTimeout(() => {
+        setPaymentLink(data);
+      }, 3000);
     }
   })
 
@@ -45,12 +58,11 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     },
   })
 
-  const { formatCurrency } = useCurrency();
-
-  const form = useRef<HTMLFormElement>(null);
-
-  const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const validateTelegramUsernameMutation = useMutation({
+    mutationFn: async (username: string) => {
+      return (await axiosHandler.get(`/website-content/telegram/${username}`)).data
+    },
+  })
 
   const handlePlanSelect = (plan: string) => {
     setSelectedPlan(plan);
@@ -63,7 +75,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     event('subscription_auto_renewal_toggled', { category: "Auto Renewal", label: autoRenewal ? "Enabled" : "Disabled" });
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const subscriptionPlanId = Number(selectedPlan);
     if (!form.current || !subscriptionPlanId) return;
@@ -87,7 +99,15 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       courseSlug: searchParams['enrollment-course'],
     }
 
-    createSubscription(payload);
+    if (referralCode) {
+      const referralCodeResponse = await checkReferralCodeMutation.mutateAsync(referralCode);
+      if (!referralCodeResponse) return alert('Invalid referral code');
+    }
+
+    const telegramUsernameResponse = await validateTelegramUsernameMutation.mutateAsync(telegramUserName);
+    if (telegramUsernameResponse) return alert('Telegram username already taken');
+
+    createSubscriptionMutation.mutate(payload);
   }
 
   const generateFrequency = (plan: ISubscriptionPlan) => {
@@ -96,51 +116,76 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
 
   const handleReferralCodeChange = (e: React.FocusEvent<HTMLInputElement>) => {
     const code = e.target.value;
+    if (!code) return;
     checkReferralCodeMutation.mutate(code);
   }
 
-  console.log(checkReferralCodeMutation.data)
+  const handleTelegramUsernameChange = (e: React.FocusEvent<HTMLInputElement>) => {
+    validateTelegramUsernameMutation.reset();
+    const username = e.target.value;
+    if (!username) return;
+    validateTelegramUsernameMutation.mutate(username);
+  }
 
   const plans = data || [];
+  const disabled = !selectedPlan || validateTelegramUsernameMutation.data
+
+  useEffect(() => {
+    const referralCode = localStorage.getItem('referral');
+
+    if (referralCode) {
+      document.getElementsByName('referralCode')[0]?.setAttribute('value', referralCode);
+      checkReferralCodeMutation.mutate(referralCode);
+    }
+  }, []);
 
   if (error) {
-    return <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
-      <Image src='/images/empty-folder.svg' alt='Error' width={100} height={100} />
-      <div className='space-y-2'>
-        <p className='text-2xl font-gishaBold text-center'>Oops! Something went wrong</p>
-        <p className='font-light text-center'>We couldn&apos;t load the subscription plans at the moment</p>
+    return (
+      <div className='root-section !py-10 gap-6 flex flex-col items-center justify-center h-[70dvh]'>
+        <Image src='/images/empty-folder.svg' alt='Error' width={100} height={100} />
+        <div className='space-y-2'>
+          <p className='text-2xl font-gishaBold text-center'>Oops! Something went wrong</p>
+          <p className='font-light text-center'>We couldn&apos;t load the subscription plans at the moment</p>
+        </div>
+        <Button size="sm" variant='secondary' loading={isRefetching} onClick={() => refetch()}>Reload Plans</Button>
       </div>
-      <Button size="sm" variant='secondary' loading={isRefetching} onClick={() => refetch()}>Reload Plans</Button>
-    </div>
+    )
   }
 
   if (plans.length === 0 && !isLoading) {
-    return <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]' data-aos='fade-up'>
-      <Image src='/images/registration-closed.svg' alt='Error' width={100} height={100} />
+    return (
+      <div className='root-section !max-w-md !py-10 gap-10 flex flex-col items-center justify-center h-[70dvh]'>
+        <Image src='/images/registration-closed.svg' alt='Error' width={100} height={100} />
 
-      <div className='space-y-2'>
-        <p className='text-2xl font-gishaBold text-center'>Registration closed</p>
-        <p className='text-center font-light'>🚧 We&apos;re currently not accepting new subscriptions</p>
+        <div className='space-y-2'>
+          <p className='text-2xl font-gishaBold text-center'>Registration closed</p>
+          <p className='text-center font-light'>🚧 We&apos;re currently not accepting new subscriptions</p>
+        </div>
+        <hr className='border-primary-100/10 w-full' />
+        <div className='space-y-4 max-w-sm flex flex-col items-center'>
+          <p className='text-center font-light'>Thank you for your interest in joining us! Our subscription plans are temporarily unavailable as registration is closed.</p>
+          <Button size="sm" variant='secondary' href='/'>Go To Homepage</Button>
+        </div>
       </div>
-      <hr className='border-primary-100/10 w-full' />
-      <div className='space-y-4 max-w-sm flex flex-col items-center'>
-        <p className='text-center font-light'>Thank you for your interest in joining us! Our subscription plans are temporarily unavailable as registration is closed.</p>
-        <Button size="sm" variant='secondary' href='/'>Go To Homepage</Button>
-      </div>
-    </div>
+    )
   }
 
-  if (createSubscriptionSuccess) {
-    return <div className='root-section !max-w-md !py-10 gap-6 flex flex-col items-center justify-center h-max mt-40 border border-[#B0CAFF1A]'>
-      <Image src='/images/account-creation.svg' alt='Error' width={100} height={100} />
-      <p className='text-xl font-gishaBold text-center'>Account Created Successfully 🎉 </p>
-      <p className='text-center font-light'>You&apos;re now one step closer to transforming your skills and achieving your goals.
-        You&apos;re being redirected to complete your subscription payment</p>
-    </div>
+  if (createSubscriptionMutation.isSuccess) {
+    return (
+      <div className='root-section !max-w-md !py-10 gap-6 flex flex-col items-center justify-center h-max mt-40 border border-[#B0CAFF1A]'>
+        <Image src='/images/account-creation.svg' alt='Error' width={100} height={100} />
+        <p className='text-xl font-gishaBold text-center'>Account Created Successfully 🎉 </p>
+        <p className='text-center font-light'>You&apos;re now one step closer to transforming your skills and achieving your goals.
+          You&apos;re being redirected to complete your subscription payment</p>
+        {paymentLink &&
+          <Link href={paymentLink} className='text-sm text-accent'>If you are not redirected, <span className='font-medium text-primary-100'>click here</span></Link>
+        }
+      </div>
+    )
   }
 
   return (
-    <div className='root-section !py-10 space-y-10 flex flex-col items-center' data-aos='fade-up'>
+    <div className='root-section !py-10 space-y-10 flex flex-col items-center'>
       <div className='w-full md:w-2/3 lg:w-1/3 flex flex-col space-y-10'>
         <div className='space-y-2 flex flex-col items-center'>
           <p className='text-2xl font-gishaBold text-center'>Get started on your journey</p>
@@ -155,8 +200,34 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
           </div>
           <Input type='email' required name='email' icon='ri:mail-fill' placeholder='Email Address' />
           <div className='relative space-y-1.5'>
-            <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' icon='ri:telegram-fill' placeholder='Telegram Username' />
+            <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' onBlur={handleTelegramUsernameChange} icon='ri:telegram-fill' placeholder='Telegram Username' />
             <p className='text-xs text-accent'>Enter your telegram username beginning with the @</p>
+            <div className='flex items-center gap-2'>
+              {!validateTelegramUsernameMutation.data && validateTelegramUsernameMutation.isSuccess ?
+                <Fragment>
+                  <IconifyIcon icon="ri:check-fill" className='text-green-500 flex items-center' />
+                  <p className='text-xs text-accent'>Telegram username verified</p>
+                </Fragment>
+                :
+                <Fragment>
+                  {validateTelegramUsernameMutation.isPending ?
+                    <Fragment>
+                      <LoadingIcons.TailSpin strokeWidth={2} height={15} width={15} />
+                      <p className='text-xs text-accent'>Verifying your telegram username</p>
+                    </Fragment>
+                    :
+                    <Fragment>
+                      {validateTelegramUsernameMutation.data && validateTelegramUsernameMutation.isSuccess &&
+                        <Fragment>
+                          <IconifyIcon icon="ri:close-fill" className='text-destructive flex items-center' />
+                          <p className='text-xs text-destructive'>This username is already taken. Please try a different one</p>
+                        </Fragment>
+                      }
+                    </Fragment>
+                  }
+                </Fragment>
+              }
+            </div>
           </div>
           <div className='flex flex-col gap-2'>
             <Input type='text' name='referralCode' icon='ri:share-fill' placeholder='Referal code' onBlur={handleReferralCodeChange} />
@@ -221,8 +292,8 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
           <p className='text-sm text-accent'>If enabled, you&apos;ll be asked to enter your card details during payment for automatic renewals</p>
         </div>
         <div className='flex flex-col gap-4'>
-          <Button disabled={!selectedPlan} loading={createSubscriptionLoading} onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
-          {createSubscriptionError && <p className='text-sm text-destructive text-center'>{createSubscriptionError.message}</p>}
+          <Button disabled={disabled} loading={createSubscriptionMutation.isPending} onClick={() => form.current?.requestSubmit()} variant='default' className='w-max mx-auto'>Subscribe to the Grind</Button>
+          {createSubscriptionMutation.error && <p className='text-sm text-destructive text-center'>{createSubscriptionMutation.error.message}</p>}
         </div>
       </div>
     </div>
