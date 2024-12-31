@@ -7,20 +7,12 @@ const nextConfig = {
         protocol: "https",
       },
       {
-        hostname: "plus.unsplash.com",
         protocol: "https",
+        hostname: "thegrindacademy.fra1.cdn.digitaloceanspaces.com",
       },
       {
-        hostname: "unsplash.com",
         protocol: "https",
-      },
-      {
-        hostname: "autox-test.ams3.cdn.digitaloceanspaces.com",
-        protocol: "https",
-      },
-      {
         hostname: "thegrindacademy.fra1.digitaloceanspaces.com",
-        protocol: "https",
       },
     ],
   },
