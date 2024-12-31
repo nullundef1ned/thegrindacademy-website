@@ -102,7 +102,7 @@ export default function Header() {
           </div>
           <div className='flex flex-col gap-6'>
             <Button onClick={closeMobileNavigation} href='/subscription' className='w-full'>Sign up</Button>
-            <Button onClick={closeMobileNavigation} href='https://app.thegrindacademy.com' target='_blank' variant='outline' className='w-full'>Log in</Button>
+            <Button onClick={closeMobileNavigation} href='https://app.thegrindacademy.co' target='_blank' variant='outline' className='w-full'>Log in</Button>
           </div>
         </div>
       }
