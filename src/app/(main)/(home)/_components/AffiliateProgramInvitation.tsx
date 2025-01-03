@@ -2,9 +2,7 @@
 
 import React from 'react'
 import Blur from '@/components/Blur'
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import environmentUtil from '@/utils/env.util';
 import BrandBars from '@/components/BrandBars';
 
 export default function AffiliateProgramInvitation() {

@@ -47,7 +47,7 @@ export default async function AffiliateProgramPage() {
               Join our affiliate program and earn 20% of every sale you refer to us.
             </p>
             <p className=" text-muted text-lg" data-aos='fade-right' data-aos-delay={200}>
-              We're on a mission to help people achieve their goals. And it all starts with skilling up.
+              We&apos;re on a mission to help people achieve their goals. And it all starts with skilling up.
               Help others start building their skills while expanding your network.
             </p>
             <Button data-aos='fade-right' data-aos-delay={300} href={`${environmentUtil.DASHBOARD_URL}/affiliate/signup`}>Start Today</Button>
