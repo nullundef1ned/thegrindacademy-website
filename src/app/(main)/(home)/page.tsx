@@ -11,6 +11,7 @@ import CertificateSection from './_components/CertificateSection';
 import FAQSection from './_components/FAQSection';
 import { Fragment } from 'react';
 import InfluencerSection from './_components/InfluencerSection';
+import AffiliateProgramInvitation from './_components/AffiliateProgramInvitation';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <PlansSection />
       <SuccessStoriesSection />
       <CertificateSection />
+      <AffiliateProgramInvitation />
       <FAQSection />
     </Fragment>
   );
