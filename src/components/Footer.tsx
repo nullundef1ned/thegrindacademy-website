@@ -20,13 +20,15 @@ export default function Footer() {
   const quickLinks = [
     { name: 'Courses', href: '/courses' },
     { name: 'Subscription', href: '/subscription' },
-    { name: 'About Us', href: '/about' },
+    { name: 'About The Grind', href: '/about' },
+    { name: 'Join Our Affiliate Program', href: '/affiliate-program' },
     { name: 'FAQs', href: '/#faqs' },
   ]
 
   const legalLinks = [
     { name: 'Terms of Service', href: '/terms' },
     { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'Referral Policy', href: '/referral-policy' },
   ]
 
   const socialLinks = meta?.socialMediaLinks || []
