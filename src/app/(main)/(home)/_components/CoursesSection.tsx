@@ -3,7 +3,6 @@
 import React from 'react'
 import Blur from '@/components/Blur'
 import { Button } from '@/components/ui/button'
-import Image from 'next/image';
 import Link from 'next/link';
 import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
