@@ -8,6 +8,7 @@ import Link from 'next/link';
 import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { ICourse } from '@/app/_module/app.interfaces';
+import Video from '@/components/Video';
 
 export default function CoursesSection() {
   const initialDelay = 300;
@@ -50,29 +51,22 @@ export default function CoursesSection() {
       {coursesLoaded && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full md:w-8/12 lg:w-11/12 mx-auto">
           {courses.map((course: ICourse, index: number) => (
-            <Link key={index} href={`/c/${course.slug}`} data-aos='fade-up' data-aos-delay={initialDelay + ((index + 1) * 200)}>
-              <div
-                className='border rounded-[2px] p-5 relative radial-gradient from-[#00246B26] to-[#4B7DE026]'>
-                <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />
-                <div className='absolute -top-1.5 -right-1.5 size-3 bg-[#353D50]' />
-                <div className='absolute -bottom-1.5 -left-1.5 size-3 bg-[#353D50]' />
-                <div className='absolute -bottom-1.5 -right-1.5 size-3 bg-[#353D50]' />
-                <div className="flex flex-col space-y-6">
-                  <div className='relative w-full h-60'>
-                    <Image src={course.media.thumbnailUrl} alt={course.name} fill className='object-cover' />
-                  </div>
-                  <div className='flex flex-col space-y-4'>
-                    <p className='text-xl font-gishaBold line-clamp-1'>
-                      {course.name}
-                    </p>
-                    <hr className='w-full' />
-                    <p className='text-accent line-clamp-2'>
-                      {course.shortDescription}
-                    </p>
-                  </div>
-                </div>
+            <div
+              key={index} data-aos='fade-up' data-aos-delay={initialDelay + ((index + 1) * 200)}
+              className='border rounded-md relative overflow-hidden'>
+              <div className="flex flex-col">
+                <Video src={course.media.introVideoUrl} poster={course.media.thumbnailUrl} />
+                <Link href={`/c/${course.slug}`} className='flex flex-col space-y-4 p-4'>
+                  <p className='text-lg font-gishaBold'>
+                    {course.name}
+                  </p>
+                  <hr className='w-full' />
+                  <p className='text-accent line-clamp-2 text-sm'>
+                    {course.shortDescription}
+                  </p>
+                </Link>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       )}
