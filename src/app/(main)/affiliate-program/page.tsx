@@ -44,13 +44,13 @@ export default async function AffiliateProgramPage() {
           <div className="col-span-1 lg:col-span-4 space-y-4">
             <h1 className="text-4xl lg:text-5xl font-gishaBold" data-aos='fade-right'>Become an Affiliate</h1>
             <p className=" text-accent text-sm" data-aos='fade-right' data-aos-delay={100}>
-              Join our affiliate program and earn 20% of every sale you refer to us.
+              Join our affiliate program and earn 33% of every sale you refer to us.
             </p>
             <p className=" text-muted text-lg" data-aos='fade-right' data-aos-delay={200}>
               We&apos;re on a mission to help people achieve their goals. And it all starts with skilling up.
               Help others start building their skills while expanding your network.
             </p>
-            <Button data-aos='fade-right' data-aos-delay={300} href={`${environmentUtil.DASHBOARD_URL}/affiliate/signup`}>Start Today</Button>
+            <Button data-aos='fade-right' data-aos-delay={300} href={`${environmentUtil.DASHBOARD_URL}/affiliate/register`}>Start Today</Button>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default async function AffiliateProgramPage() {
               </div>
             ))}
           </div>
-          <Button data-aos='fade-right' data-aos-delay={400} href={`${environmentUtil.DASHBOARD_URL}/affiliate/signup`}>Get Started</Button>
+          <Button data-aos='fade-right' data-aos-delay={400} href={`${environmentUtil.DASHBOARD_URL}/affiliate/register`}>Get Started</Button>
         </div>
         <div className="hidden lg:block lg:col-span-3 border border-[#B0CAFF0D] p-4 rounded radial-gradient from-[#0E121F73] to-[#00246B19]">
           <div className="w-full h-full relative">
