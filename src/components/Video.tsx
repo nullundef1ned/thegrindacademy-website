@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react'
 import IconifyIcon from './IconifyIcon';
 import helperUtil from '@/utils/helper.util';
@@ -12,6 +14,7 @@ interface IVideoProps {
 
 export default function Video({ src, poster, autoPlay = false, muted = false }: IVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [isMuted, setIsMuted] = useState(muted);
   const [videoSpeed, setVideoSpeed] = useState(1);
@@ -21,6 +24,7 @@ export default function Video({ src, poster, autoPlay = false, muted = false }: 
   const videoTotalTime = videoRef.current?.duration;
 
   const currentVideoTime = percentageWatched * videoTotalTime! / 100;
+  const displayControls = isPlaying;
 
   const handlePlay = () => videoRef.current && videoRef.current.play();
   const handlePause = () => videoRef.current && videoRef.current.pause();
@@ -47,8 +51,12 @@ export default function Video({ src, poster, autoPlay = false, muted = false }: 
   const togglePlay = () => {
     if (videoRef.current?.paused) {
       handlePlay();
+      setTimeout(() => {
+        containerRef.current?.classList.remove('group');
+      }, 2000);
     } else {
       handlePause();
+      containerRef.current?.classList.add('group');
     }
   }
 
@@ -79,11 +87,16 @@ export default function Video({ src, poster, autoPlay = false, muted = false }: 
         setPercentageWatched(percentage);
       }
     }
-  }, [videoRef])
+    if (containerRef.current) {
+      containerRef.current.onmouseenter = () => {
+        containerRef.current?.classList.add('group');
+      }
+    }
+  }, [videoRef, containerRef])
 
   return (
-    <div className="relative group w-full aspect-video overflow-hidden bg-black">
-      <div className={clsx(isPlaying && 'group-hover:!translate-y-0',
+    <div ref={containerRef} className="relative group w-full aspect-video overflow-hidden bg-black">
+      <div className={clsx(displayControls && 'group-hover:!translate-y-0',
         "absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-40 w-full px-8 z-20 transition-all duration-500 ease-linear")}>
         <div className={'bg-[#07090F] rounded-full flex items-center gap-4 justify-between w-full p-3'}>
           <div className="flex items-center gap-4 w-full">
@@ -114,13 +127,13 @@ export default function Video({ src, poster, autoPlay = false, muted = false }: 
       <div
         className={clsx(
           "absolute inset-0 grid place-items-center z-10 w-full h-full group-hover:bg-[#07090F]/30 transition-all ease-linear",
-          isPlaying ? '!bg-transparent' : '!bg-[#07090F]/30')}
+          displayControls ? '!bg-transparent' : '!bg-[#07090F]/30')}
       >
         <div
           onClick={togglePlay}
           className={clsx(
             'rounded-full flex-shrink-0 bg-white size-16 z-20 grid place-items-center cursor-pointer group-hover:opacity-100 transition-all ease-linear',
-            !isPlaying ? 'opacity-100' : 'opacity-0')}
+            !displayControls ? 'opacity-100' : 'opacity-0')}
         >
           <IconifyIcon icon={isPlaying ? 'ri:pause-mini-fill' : 'ri:play-mini-fill'} className="size-8 text-[#07090F] flex items-center" size={40} />
         </div>

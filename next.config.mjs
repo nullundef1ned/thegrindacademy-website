@@ -3,10 +3,6 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "images.unsplash.com",
-        protocol: "https",
-      },
-      {
         protocol: "https",
         hostname: "thegrindacademy.fra1.cdn.digitaloceanspaces.com",
       },
@@ -15,6 +11,9 @@ const nextConfig = {
         hostname: "thegrindacademy.fra1.digitaloceanspaces.com",
       },
     ],
+  },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
   },
 };
 
