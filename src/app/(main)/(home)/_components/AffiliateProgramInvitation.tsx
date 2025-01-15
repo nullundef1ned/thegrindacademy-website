@@ -13,8 +13,8 @@ export default function AffiliateProgramInvitation() {
       <Blur className='absolute w-1/2 h-1/2 -z-10' />
       <div className='space-y-4 flex flex-col items-center w-full md:w-1/2 mx-auto z-20'>
         <h1 className='text-3xl font-gishaBold text-center' data-aos='fade-up' data-aos-delay={initialDelay}>Join our Affiliate Program</h1>
-        <p className='text-center text-muted'>Join our affiliate program and earn 33% of every sale you refer to us.</p>
-        <Button href="/affiliate-program">Learn More</Button>
+        <p className='text-center text-muted'>Join our affiliate program and earn up to 50% of every sale you refer to us.</p>
+        <Button href="/affiliate-program" size="sm">Learn More</Button>
       </div>
       <BrandBars containerClassName='absolute w-2/3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full opacity-50' />
     </div>

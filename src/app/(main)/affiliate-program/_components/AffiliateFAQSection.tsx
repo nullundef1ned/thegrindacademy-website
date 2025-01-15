@@ -6,14 +6,14 @@ import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { IFAQ } from '@/app/_module/app.interfaces';
 
-export default function FAQSection() {
+export default function AffiliateFAQSection() {
 
   const axiosHandler = useAxios();
 
   const { data, isLoading, error } = useQuery<IFAQ[]>({
     queryKey: ['faqs'],
     queryFn: async () => {
-      return (await axiosHandler.get('/website-content/faq')).data
+      return (await axiosHandler.get('/website-content/faq', { params: { type: 'affiliate' } })).data
     },
   })
 
