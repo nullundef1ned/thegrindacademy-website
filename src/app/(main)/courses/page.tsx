@@ -1,10 +1,10 @@
 import { ICourse, IPagination } from '@/app/_module/app.interfaces';
 import Blur from '@/components/Blur'
 import IconifyIcon from '@/components/IconifyIcon';
-import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import CoursesPagination from './_components/CoursesPagination';
+import Video from '@/components/Video';
 
 export default async function CoursesPage({ searchParams }: { searchParams: { page: number } }) {
   const initialDelay = 300;
@@ -34,8 +34,8 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
 
   return (
     <div className='root-section !py-10 space-y-10 flex flex-col items-center'>
-      <div className='flex items-center bg-[#004DE830] border border-[#3377FF6B] rounded-full px-6 py-3 w-max'>
-        <p className='text-sm text-primary-100'>All our wealth creation methods comes with a certificate</p>
+      <div className='flex items-center bg-[#004DE830] border border-[#3377FF6B] rounded-full px-6 py-3'>
+        <p className='text-xs lg:text-sm text-primary-100 text-center'>All our wealth creation methods comes with a certificate</p>
       </div>
       <div className='relative flex flex-col items-center'>
         <Blur className='absolute w-full md:w-[60%] h-40 -translate-y-10' />
@@ -53,7 +53,7 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
       </div>
       {courses.length > 0 && (
         <div data-aos='fade-up' data-aos-delay={initialDelay + 200} className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full md:w-8/12 lg:w-10/12 mx-auto">
-          {courses.map((course: ICourse, index: number) => (
+          {/* {courses.map((course: ICourse, index: number) => (
             <div
               key={index}
               className={clsx(index % 3 === 0 ? 'col-span-1 lg:col-span-2' : 'col-span-1', 'border rounded-[2px] p-6 relative radial-gradient from-[#00246B26] to-[#4B7DE026]')}>
@@ -84,6 +84,32 @@ export default async function CoursesPage({ searchParams }: { searchParams: { pa
                       <IconifyIcon icon='ri:arrow-right-up-line' className='flex items-center group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300' />
                     </div>
                   </Link>
+                </div>
+              </div>
+            </div>
+          ))} */}
+          {courses.map((course: ICourse, index: number) => (
+            <div
+              key={index}
+              className='border rounded-md relative overflow-hidden'>
+              <div className="flex flex-col">
+                <Video src={course.media.introVideoUrl} poster={course.media.thumbnailUrl} />
+                <div className='flex flex-col space-y-4 p-4'>
+                  <p className='text-lg font-gishaBold'>
+                    {course.name}
+                  </p>
+                  <Link href={`/c/${course.slug}`} className='group text-primary-200 uppercase w-max'>
+                    <div className='flex items-center space-x-1'>
+                      <p className=' text-xs font-medium'>
+                        Start Learning
+                      </p>
+                      <IconifyIcon icon='ri:arrow-right-up-line' className='flex items-center group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300' />
+                    </div>
+                  </Link>
+                  <hr className='w-full' />
+                  <p className='text-accent line-clamp-2 text-sm'>
+                    {course.shortDescription}
+                  </p>
                 </div>
               </div>
             </div>
