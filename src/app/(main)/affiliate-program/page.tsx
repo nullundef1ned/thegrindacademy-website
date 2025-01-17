@@ -63,7 +63,7 @@ export default async function AffiliateProgramPage() {
         <BrandBars containerClassName="absolute top-1/2 right-0 -translate-y-1/2 w-1/3 animate-pulse" />
         <div className="w-full h-full p-8 grid grid-cols-1 lg:grid-cols-7 gap-4 place-items-center radial-gradient from-[#0E121F73] to-[#00246B19] border border-[#B0CAFF0D] z-20">
           <div className="col-span-1 lg:col-span-4 space-y-4">
-            <h1 className="text-4xl lg:text-5xl font-gishaBold" data-aos='fade-right'>Become a Partner in Success: Join Our Affiliate Program</h1>
+            <h1 className="text-4xl lg:text-5xl font-gishaBold" data-aos='fade-right'>Become a Partner in Success</h1>
             <p className=" text-accent text-sm" data-aos='fade-right' data-aos-delay={100}>
               Earn Up to 50% Commission on every referral
             </p>
