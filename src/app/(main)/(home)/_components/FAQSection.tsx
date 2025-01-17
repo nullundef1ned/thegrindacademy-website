@@ -13,7 +13,7 @@ export default function FAQSection() {
   const { data, isLoading, error } = useQuery<IFAQ[]>({
     queryKey: ['faqs'],
     queryFn: async () => {
-      return (await axiosHandler.get('/website-content/faq')).data
+      return (await axiosHandler.get('/website-content/faq', { params: { type: 'general' } })).data
     },
   })
 
