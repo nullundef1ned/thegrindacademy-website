@@ -8,17 +8,27 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import useURL from '@/hooks/useURL';
+import useAxios from '@/hooks/useAxios';
 
 export const queryClient = new QueryClient();
 
 export default function RootTemplate({ children }: { children: React.ReactNode }) {
 
+  const axiosHandler = useAxios();
   const { searchParams } = useURL();
   const referralCode = searchParams?.get('referral') as string;
 
+
   useEffect(() => {
-    if (referralCode) localStorage.setItem('referral', referralCode);
-  }, [referralCode]);
+    const logReferralVisit = async (code: string) => {
+      await axiosHandler.post(`/website-content/referral/${code}/visit`)
+    }
+
+    if (referralCode) {
+      localStorage.setItem('referral', referralCode);
+      logReferralVisit(referralCode);
+    }
+  }, [referralCode, axiosHandler]);
 
   useEffect(() => {
     AOS.init({

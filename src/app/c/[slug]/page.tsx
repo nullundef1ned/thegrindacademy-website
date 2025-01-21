@@ -125,27 +125,28 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
           <p className='text-muted text-sm'>What you can expect to learn</p>
         </div>
 
-        {course.lessons.sort((a, b) => a.position - b.position).map((lesson, index) => (
-          <div key={index}
-            className='border rounded-[2px] p-6 flex justify-between relative w-full radial-gradient from-[#00246B26] to-[#4B7DE026]'
-            data-aos='fade-up' data-aos-delay={initialDelay + 300 + (index * 100)}>
-            <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />
-            <div className='absolute -top-1.5 -right-1.5 size-3 bg-[#353D50]' />
-            <div className='absolute -bottom-1.5 -left-1.5 size-3 bg-[#353D50]' />
-            <div className='absolute -bottom-1.5 -right-1.5 size-3 bg-[#353D50]' />
-            <div className='flex flex-col space-y-2'>
-              <p className='text-accent text-lg font-medium'>{lesson.title}</p>
-              {lesson.description && (
-                <p className='text-white text-sm'>{lesson.description}</p>
-              )}
+        <div className='w-full space-y-4 flex flex-col gap-4' data-aos='fade-up' data-aos-delay={initialDelay + 400}>
+          {course.lessons.sort((a, b) => a.position - b.position).map((lesson, index) => (
+            <div key={index}
+              className='border rounded-md p-6 flex justify-between relative w-full'>
+              {/* <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />
+              <div className='absolute -top-1.5 -right-1.5 size-3 bg-[#353D50]' />
+              <div className='absolute -bottom-1.5 -left-1.5 size-3 bg-[#353D50]' />
+              <div className='absolute -bottom-1.5 -right-1.5 size-3 bg-[#353D50]' /> */}
+              <div className='flex flex-col space-y-2'>
+                <p className='text-accent text-base font-medium'>{lesson.title}</p>
+                {lesson.description && (
+                  <p className='text-white text-sm'>{lesson.description}</p>
+                )}
+              </div>
+              <div className='flex items-center gap-2'>
+                <IconifyIcon icon='ri:timer-fill' className='text-accent flex items-center' />
+                <p className='text-xs text-accent flex-shrink-0'>{lesson.studyTimeInMinutes} {pluralize('minute', lesson.studyTimeInMinutes)}</p>
+              </div>
             </div>
-            <div className='flex items-center gap-2'>
-              <IconifyIcon icon='ri:timer-fill' className='text-accent flex items-center' />
-              <p className='text-xs text-accent flex-shrink-0'>{lesson.studyTimeInMinutes} {pluralize('minute', lesson.studyTimeInMinutes)}</p>
-            </div>
-          </div>
-        ))}
-        <Button href={enrollmentURL} className='w-max mx-auto' data-aos='fade-up'>Enroll Now</Button>
+          ))}
+        </div>
+        <Button href={enrollmentURL} className='w-max mx-auto'>Enroll Now</Button>
       </div>
     </Fragment>
   )

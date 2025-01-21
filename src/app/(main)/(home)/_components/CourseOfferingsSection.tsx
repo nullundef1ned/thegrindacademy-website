@@ -5,7 +5,7 @@ import Blur from '@/components/Blur';
 import IconifyIcon from '@/components/IconifyIcon';
 
 export default function CourseOfferingsSection() {
-  const initialDelay = 300;  
+  const initialDelay = 300;
   const offerings = [
     {
       icon: 'ri:rocket-fill',

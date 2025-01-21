@@ -50,7 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (href) {
       return (
-        <Link href={href} target={target}>
+        <Link href={href} target={target} className={cn(className, "block")}>
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}

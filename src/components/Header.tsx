@@ -9,6 +9,7 @@ import { Button } from './ui/button';
 import IconifyIcon from './IconifyIcon';
 import { useQuery } from '@tanstack/react-query';
 import { IStudentInterview, ITestimonial } from '@/app/_module/app.interfaces';
+import environmentUtil from '@/utils/env.util';
 
 export default function Header() {
   const [mobileNavigation, setMobileNavigation] = useState(false);
@@ -40,6 +41,10 @@ export default function Header() {
     {
       name: 'Courses',
       href: '/courses',
+    },
+    {
+      name: 'Affiliate Program',
+      href: '/affiliate-program',
     },
     areThereTestimonials && {
       name: 'Testimonials',
@@ -74,7 +79,7 @@ export default function Header() {
           ))}
         </div>
         <div className='hidden lg:flex items-center gap-4'>
-          <Button href='https://app.thegrindacademy.co' target='_blank' variant='outline'>Log in</Button>
+          <Button href={environmentUtil.DASHBOARD_URL} target='_blank' variant='outline'>Log in</Button>
           <Button href='/subscription'>Sign up</Button>
         </div>
         <div onClick={() => setMobileNavigation(!mobileNavigation)} className='lg:hidden bg-[#00246B66] size-8 flex flex-col items-center justify-center rounded cursor-pointer'>
@@ -102,7 +107,7 @@ export default function Header() {
           </div>
           <div className='flex flex-col gap-6'>
             <Button onClick={closeMobileNavigation} href='/subscription' className='w-full'>Sign up</Button>
-            <Button onClick={closeMobileNavigation} href='https://app.thegrindacademy.co' target='_blank' variant='outline' className='w-full'>Log in</Button>
+            <Button onClick={closeMobileNavigation} href={environmentUtil.DASHBOARD_URL} target='_blank' variant='outline' className='w-full'>Log in</Button>
           </div>
         </div>
       }
