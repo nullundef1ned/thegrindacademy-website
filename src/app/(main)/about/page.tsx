@@ -14,12 +14,12 @@ export default function AboutPage() {
     {
       thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       title: 'The Vision',
-      description: 'With a passion for empowering individuals through knowledge and skills, Dexter founded Grind Academy to provide accessible, top-tier education to aspiring professionals worldwideWith a passion for empowering individuals through knowledge and skills',
+      description: 'To revolutionize the landscape of online education by setting the standard for excellence in mentor-driven, outcome-based learning. Our vision is to be the leading global academy that not only teaches financial and digital skills but also creates a dynamic platform for sustainable wealth creation. We envision a world where anyone, anywhere can access the tools they need to succeed and thrive in an evolving economy, transcending traditional barriers to education and employment. At TheGrindAcademy, we strive to cultivate a community of learners who are not just participants in the digital economy but leaders and innovators shaping the future.',
     },
     {
       thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       title: 'The Mission',
-      description: 'With a passion for empowering individuals through knowledge and skills, Dexter founded Grind Academy to provide accessible, top-tier education to aspiring professionals worldwideWith a passion for empowering individuals through knowledge and skills',
+      description: 'Our mission is to empower individuals worldwide with the knowledge and skills necessary to achieve financial independence through cutting-edge online education. We are committed to providing accessible, practical, and transformative learning experiences that equip our students with the tools required for success in today’s digital economy. By fostering a supportive community and offering personalized mentorship from industry experts, we aim to inspire and guide our students to not only meet but exceed their financial goals. Our dedication is to ensure that every member of TheGrindAcademy can unlock their full potential and make significant advancements in their personal and professional lives.',
     },
   ]
 
