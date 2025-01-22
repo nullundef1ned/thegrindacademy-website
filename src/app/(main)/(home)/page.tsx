@@ -26,8 +26,8 @@ export default function Home() {
       <RiskFreeSection />
       <PlansSection />
       <SuccessStoriesSection />
-      <CertificateSection />
       <AffiliateProgramInvitation />
+      <CertificateSection />
       <FAQSection />
     </Fragment>
   );
