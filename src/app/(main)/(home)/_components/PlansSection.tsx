@@ -67,8 +67,8 @@ export default function PlansSection() {
               }
             </div>
             <div className='space-y-2'>
+              {plan.upSellPrice && <p className='text-primary-100 line-through'>{formatCurrency(plan.upSellPrice)}</p>}
               <p className='text-3xl font-gishaBold'>{formatCurrency(plan.price)} <span className='lowercase text-xs font-sans truncate'>every {generateFrequency(plan)}</span></p>
-              {/* <p className='text-primary-100'>{plan.description}</p> */}
             </div>
             <div>
               <Button href={`/subscription?plan=${plan.name}`} variant={plan.isDeal ? 'default' : 'secondary'} className='w-full'>Get Started</Button>
