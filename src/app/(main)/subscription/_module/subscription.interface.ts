@@ -36,7 +36,7 @@ export interface ISubscriptionRequest {
   firstName: string;
   lastName: string;
   email: string;
-  telegramUserName: string;
+  telegramUserName?: string;
   referralCode: string;
   subscriptionPlanId: number;
   autoRenewal: boolean;
