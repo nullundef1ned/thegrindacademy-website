@@ -109,8 +109,10 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       if (!referralCodeResponse) return alert('Invalid referral code');
     }
 
-    const telegramUsernameResponse = await validateTelegramUsernameMutation.mutateAsync(telegramUserName);
-    if (telegramUsernameResponse) return alert('Telegram username already taken');
+    if (telegramUserName) {
+      const telegramUsernameResponse = await validateTelegramUsernameMutation.mutateAsync(telegramUserName);
+      if (telegramUsernameResponse) return alert('Telegram username already taken');
+    }
 
     createSubscriptionMutation.mutate(payload);
   }
@@ -205,7 +207,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
           </div>
           <Input type='email' required name='email' icon='ri:mail-fill' placeholder='Email Address' />
           <div className='relative space-y-1.5'>
-            <Input type='text' required pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' onBlur={handleTelegramUsernameChange} icon='ri:telegram-fill' placeholder='Telegram Username' />
+            <Input type='text' pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' onBlur={handleTelegramUsernameChange} icon='ri:telegram-fill' placeholder='Telegram Username' />
             <p className='text-xs text-accent'>Enter your telegram username beginning with the @</p>
             <div className='flex items-center gap-2'>
               {!validateTelegramUsernameMutation.data && validateTelegramUsernameMutation.isSuccess ?
