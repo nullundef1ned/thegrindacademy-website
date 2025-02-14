@@ -5,8 +5,11 @@ import environmentUtil from "@/utils/env.util";
 import Image from "next/image";
 import { Fragment } from "react";
 import AffiliateFAQSection from "./_components/AffiliateFAQSection";
+import { Metadata } from "next";
 
-export const metadata = {
+const affiliateProgramImage = 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739574722824-8828ab66-aae7-4c40-adbe-77b145161373.png'
+
+export const metadata: Metadata = {
   alternates: {
     canonical: '/affiliate-program',
   },
@@ -15,10 +18,13 @@ export const metadata = {
   openGraph: {
     title: 'Affiliate Program',
     description: 'Affiliate Program',
+    images: [affiliateProgramImage]
   },
   twitter: {
     title: 'Affiliate Program',
     description: 'Affiliate Program',
+    card: 'summary_large_image',
+    images: [affiliateProgramImage]
   },
 }
 
@@ -91,7 +97,7 @@ export default async function AffiliateProgramPage() {
         </div>
       </div>
       <div className='root-section !py-10 grid grid-cols-1 lg:grid-cols-7 gap-10'>
-        <div className="space-y-6 col-span-1 lg:col-span-4">
+        <div className="space-y-6 col-span-1 order-2 lg:order-1 lg:col-span-4">
           <div className="space-y-2">
             <p className="text-sm text-primary-200">How it works</p>
             <h2 className="text-4xl font-gishaBold">Help people build.</h2>
@@ -116,9 +122,9 @@ export default async function AffiliateProgramPage() {
           </div>
           <Button className="w-max" data-aos='fade-right' data-aos-delay={400} href={`${environmentUtil.DASHBOARD_URL}/affiliate/register`}>Get Started</Button>
         </div>
-        <div className="hidden lg:block lg:col-span-3 border border-[#B0CAFF0D] p-4 rounded radial-gradient from-[#0E121F73] to-[#00246B19]">
+        <div className="aspect-square lg:aspect-auto order-1 lg:order-2 lg:h-full lg:col-span-3 border border-[#B0CAFF0D] p-4 rounded radial-gradient from-[#0E121F73] to-[#00246B19]">
           <div className="w-full h-full relative">
-            <Image src={'/images/default-thumbnail.jpg'} alt="Affiliate Program" fill className="object-cover absolute w-full h-full" />
+            <Image src={affiliateProgramImage} alt="Affiliate Program" fill className="object-cover absolute w-full h-full" />
           </div>
         </div>
 

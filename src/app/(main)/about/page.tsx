@@ -12,12 +12,12 @@ export default function AboutPage() {
 
   const information = [
     {
-      thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      thumbnail: 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739373181375-15f08313-ec3d-4f6b-9953-5b7401d17f30.jpeg',
       title: 'The Vision',
       description: 'To revolutionize the landscape of online education by setting the standard for excellence in mentor-driven, outcome-based learning. Our vision is to be the leading global academy that not only teaches financial and digital skills but also creates a dynamic platform for sustainable wealth creation. We envision a world where anyone, anywhere can access the tools they need to succeed and thrive in an evolving economy, transcending traditional barriers to education and employment. At TheGrindAcademy, we strive to cultivate a community of learners who are not just participants in the digital economy but leaders and innovators shaping the future.',
     },
     {
-      thumbnail: 'https://images.unsplash.com/photo-1639815188508-13f7370f664a?q=80&w=3264&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      thumbnail: 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739373219298-b6293b06-1030-40b9-a17c-7798f7a60ee4.jpeg',
       title: 'The Mission',
       description: 'Our mission is to empower individuals worldwide with the knowledge and skills necessary to achieve financial independence through cutting-edge online education. We are committed to providing accessible, practical, and transformative learning experiences that equip our students with the tools required for success in today’s digital economy. By fostering a supportive community and offering personalized mentorship from industry experts, we aim to inspire and guide our students to not only meet but exceed their financial goals. Our dedication is to ensure that every member of TheGrindAcademy can unlock their full potential and make significant advancements in their personal and professional lives.',
     },
@@ -43,7 +43,7 @@ export default function AboutPage() {
             <Blur className='absolute w-full h-40 translate-x-[44%]' />
             <div className='w-full border border-primary/10 bg-primary/10 p-4'>
               <div className="h-96 relative w-full">
-                <Image src='/images/default-thumbnail.jpg' alt='Dexter' fill className='w-full h-full object-cover' />
+                <Image src='https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739574637451-35b1fba6-a2c4-43d1-a468-6f8343ab5913.png' alt='Dexter' fill className='w-full h-full object-cover' />
               </div>
             </div>
           </div>
