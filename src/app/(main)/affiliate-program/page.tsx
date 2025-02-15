@@ -7,7 +7,7 @@ import { Fragment } from "react";
 import AffiliateFAQSection from "./_components/AffiliateFAQSection";
 import { Metadata } from "next";
 
-const affiliateProgramImage = 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739574722824-8828ab66-aae7-4c40-adbe-77b145161373.png'
+const affiliateProgramImage = 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739641939625-93e936bb-0989-4c4f-93cf-74804aebb2c7.png'
 
 export const metadata: Metadata = {
   alternates: {
