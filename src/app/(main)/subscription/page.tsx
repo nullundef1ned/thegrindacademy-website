@@ -127,12 +127,13 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     checkReferralCodeMutation.mutate(code);
   }
 
-  const handleTelegramUsernameChange = (e: React.FocusEvent<HTMLInputElement>) => {
-    validateTelegramUsernameMutation.reset();
-    const username = e.target.value;
-    if (!username) return;
-    validateTelegramUsernameMutation.mutate(username);
-  }
+  // Commented out for now because client requested to remove it
+  // const handleTelegramUsernameChange = (e: React.FocusEvent<HTMLInputElement>) => {
+  //   validateTelegramUsernameMutation.reset();
+  //   const username = e.target.value;
+  //   if (!username) return;
+  //   validateTelegramUsernameMutation.mutate(username);
+  // }
 
   const plans = data || [];
   const disabled = !selectedPlan || validateTelegramUsernameMutation.data
@@ -144,7 +145,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       document.getElementsByName('referralCode')[0]?.setAttribute('value', referralCode);
       checkReferralCodeMutation.mutate(referralCode);
     }
-  }, []);
+  }, [checkReferralCodeMutation]);
 
   if (error) {
     return (
