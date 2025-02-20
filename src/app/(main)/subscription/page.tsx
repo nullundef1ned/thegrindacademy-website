@@ -206,7 +206,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
             <Input type='text' required name='lastName' icon='ri:user-6-fill' placeholder='Last Name' />
           </div>
           <Input type='email' required name='email' icon='ri:mail-fill' placeholder='Email Address' />
-          <div className='relative space-y-1.5'>
+          {/* <div className='relative space-y-1.5'>
             <Input type='text' pattern='^@[a-zA-Z0-9_]+$' name='telegramUserName' onBlur={handleTelegramUsernameChange} icon='ri:telegram-fill' placeholder='Telegram Username' />
             <p className='text-xs text-accent'>Enter your telegram username beginning with the @</p>
             <div className='flex items-center gap-2'>
@@ -235,7 +235,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
                 </Fragment>
               }
             </div>
-          </div>
+          </div> */}
           <div className='flex flex-col gap-2'>
             <Input type='text' name='referralCode' icon='ri:share-fill' placeholder='Referal code' onBlur={handleReferralCodeChange} />
             <div className='flex items-center gap-2'>
