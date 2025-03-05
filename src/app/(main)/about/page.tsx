@@ -12,7 +12,8 @@ export default function AboutPage() {
 
   const information = [
     {
-      thumbnail: 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739373181375-15f08313-ec3d-4f6b-9953-5b7401d17f30.jpeg',
+      // thumbnail: 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1739373181375-15f08313-ec3d-4f6b-9953-5b7401d17f30.jpeg',
+      thumbnail: 'https://thegrindacademy.fra1.cdn.digitaloceanspaces.com/others/1741188961382-60c9b02d-6b0f-4f24-8341-93c10a373998.jpg',
       title: 'The Vision',
       description: 'To revolutionize the landscape of online education by setting the standard for excellence in mentor-driven, outcome-based learning. Our vision is to be the leading global academy that not only teaches financial and digital skills but also creates a dynamic platform for sustainable wealth creation. We envision a world where anyone, anywhere can access the tools they need to succeed and thrive in an evolving economy, transcending traditional barriers to education and employment. At TheGrindAcademy, we strive to cultivate a community of learners who are not just participants in the digital economy but leaders and innovators shaping the future.',
     },
@@ -51,20 +52,20 @@ export default function AboutPage() {
       </div>
       <div className='root-section !py-10 space-y-10 flex flex-col items-center'>
         <div className="space-y-10 w-full lg:w-9/12 mx-auto">
-          {information.map((course, index) => (
+          {information.map((info, index) => (
             <div key={index} data-aos='fade-up' data-aos-delay={initialDelay + ((index + 1) * 200)} className="grid grid-cols-1 items-center md:grid-cols-2 gap-10">
               <div className={clsx(index % 2 !== 0 && 'md:order-last', 'relative w-full h-80 p-3 border border-primary/10 rounded overflow-hidden bg-primary/10')}>
                 <div className='relative w-full h-full'>
-                  <Image src={course.thumbnail} alt={course.title} fill className='object-cover' />
+                  <Image src={info.thumbnail} alt={info.title} fill className='object-cover object-top' />
                 </div>
               </div>
               <div className='relative space-y-4'>
                 <Blur className='absolute w-full h-full bg-white/10' />
                 <p className='text-4xl font-gishaBold'>
-                  {course.title}
+                  {info.title}
                 </p>
                 <p className='text-accent'>
-                  {course.description}
+                  {info.description}
                 </p>
               </div>
             </div>
