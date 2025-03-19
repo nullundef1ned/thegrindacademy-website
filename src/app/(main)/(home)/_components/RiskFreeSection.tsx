@@ -18,8 +18,7 @@ export default function RiskFreeSection() {
           width={120} height={120}
           data-aos='fade-up'
         />
-        <h1 className='text-4xl font-gishaBold text-center' data-aos='fade-up' data-aos-delay={initialDelay}>Hit 6 Figures in 30 Days or Get Your Money Back</h1>
-        <p className='text-center text-muted' data-aos='fade-up' data-aos-delay={initialDelay}>We believe in the transformative power of our mentorship. If you don&apos;t see the path to six figures within 30 days, we&apos;ll refund your subscription fee, Join risk-free and unlock your potential today!</p>
+        <h1 className='text-4xl font-gishaBold text-center' data-aos='fade-up' data-aos-delay={initialDelay}>You are One step away from 6 Figures in the next 30-Days</h1>
       </div>
     </div>
   )
