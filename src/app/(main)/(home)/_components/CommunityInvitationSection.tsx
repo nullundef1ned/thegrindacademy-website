@@ -54,7 +54,7 @@ export default function CommunityInvitationSection() {
 
           <div className='flex flex-col items-center space-y-6'>
             <h3 className='text-center font-gishaBold text-4xl' data-aos='fade-up' data-aos-delay={initialDelay}>
-              Profit in 30 Days or Your Money Back. <br />
+              Profit in 30 Days <br />
               <span className='text-primary-200'>Guaranteed.</span>
             </h3>
             <p className='text-center text-accent' data-aos='fade-up' data-aos-delay={initialDelay}>
