@@ -45,15 +45,10 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     onSuccess: (data) => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       localStorage.removeItem('referral');
-      setTimeout(() => {
-        window.open(data, '_blank');
-      }, 2000);
+      window.open(data, '_blank');
       setTimeout(() => {
         setPaymentLink(data);
-      }, 3000);
-      setTimeout(() => {
-        router.push('/');
-      }, 15000);
+      }, 1000);
     }
   })
 
@@ -145,7 +140,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       document.getElementsByName('referralCode')[0]?.setAttribute('value', referralCode);
       checkReferralCodeMutation.mutate(referralCode);
     }
-  }, [checkReferralCodeMutation]);
+  }, []);
 
   if (error) {
     return (
