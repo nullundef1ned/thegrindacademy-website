@@ -23,7 +23,6 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
 
   const form = useRef<HTMLFormElement>(null);
 
-
   const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
     queryKey: ['subscription-plans'],
     queryFn: async () => {
