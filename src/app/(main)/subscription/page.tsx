@@ -31,7 +31,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   })
 
   const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(data?.[0]?.id || null);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(data?.filter(p => p.isDeal)[0]?.id || null);
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
 
   const { formatCurrency } = useCurrency();
