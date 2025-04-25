@@ -50,7 +50,7 @@ export default function LandingSection() {
         <Button href='/subscription'>Join the Grind Academy</Button>
       </div>
       <div className="flex items-center space-x-3 justify-center" data-aos='fade-up' data-aos-delay={initialDelay}>
-        <p className='text-accent text-sm'>Over 1000+ students have enrolled and counting!</p>
+        <p className='text-accent text-sm text-center'>Over 1000+ students have enrolled and counting!</p>
       </div>
     </div>
   )
