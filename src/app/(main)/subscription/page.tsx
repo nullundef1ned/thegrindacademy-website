@@ -23,11 +23,6 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
 
   const form = useRef<HTMLFormElement>(null);
 
-  const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-  const [paymentLink, setPaymentLink] = useState<string | null>(null);
-
-  const { formatCurrency } = useCurrency();
 
   const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
     queryKey: ['subscription-plans'],
@@ -35,6 +30,12 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       return (await axiosHandler.get('website-content/subscription/plan')).data
     },
   })
+
+  const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(data?.[0]?.id || null);
+  const [paymentLink, setPaymentLink] = useState<string | null>(null);
+
+  const { formatCurrency } = useCurrency();
 
   const createSubscriptionMutation = useMutation({
     mutationFn: async (data: ISubscriptionRequest) => {
