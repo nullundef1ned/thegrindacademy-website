@@ -23,7 +23,6 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
 
   const form = useRef<HTMLFormElement>(null);
 
-
   const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
     queryKey: ['subscription-plans'],
     queryFn: async () => {
@@ -32,7 +31,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   })
 
   const [autoRenewal, setAutoRenewal] = useState<boolean>(false);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(data?.[0]?.id || null);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(data?.filter(p => p.isDeal)[0]?.id || null);
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
 
   const { formatCurrency } = useCurrency();
@@ -266,7 +265,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
                 onClick={() => handlePlanSelect(plan.id)}
                 className={clsx(selectedPlan === plan.id ? 'border-[#004DE894] bg-[#00246b5e]' : 'border-[#004DE838] bg-[#00246B29] hover:bg-[#00246b5e] hover:border-[#004DE894]', 'border cursor-pointer rounded p-4 flex items-center justify-between relative transition-all duration-300')}>
                 <div className='space-y-1'>
-                  {plan.upSellPrice && <p className='text-primary-100 text-sm line-through'>{formatCurrency(plan.upSellPrice)}</p>}
+                  {plan.upSellPrice && Number(plan.upSellPrice) > 0 && <p className='text-primary-100 text-sm line-through'>{formatCurrency(plan.upSellPrice)}</p>}
                   <p className='text-2xl font-gishaBold'>{formatCurrency(plan.price)} <span className='lowercase text-xs font-sans text-primary-100'>every {generateFrequency(plan)}</span></p>
                 </div>
                 <div className='flex items-center gap-4'>
