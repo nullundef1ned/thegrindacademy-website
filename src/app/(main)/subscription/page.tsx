@@ -16,7 +16,6 @@ import LoadingIcons from 'react-loading-icons';
 import Image from 'next/image';
 import IconifyIcon from '@/components/IconifyIcon';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 export default function SubscriptionPage({ searchParams }: { searchParams: { "enrollment-course": string } }) {
 
@@ -28,7 +27,6 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [paymentLink, setPaymentLink] = useState<string | null>(null);
 
-  const router = useRouter();
   const { formatCurrency } = useCurrency();
 
   const { data, isLoading, isRefetching, error, refetch } = useQuery<ISubscriptionPlan[]>({
@@ -45,15 +43,10 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     onSuccess: (data) => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       localStorage.removeItem('referral');
-      setTimeout(() => {
-        window.open(data, '_blank');
-      }, 2000);
+      window.open(data, '_blank');
       setTimeout(() => {
         setPaymentLink(data);
-      }, 3000);
-      setTimeout(() => {
-        router.push('/');
-      }, 15000);
+      }, 1000);
     }
   })
 
@@ -145,7 +138,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
       document.getElementsByName('referralCode')[0]?.setAttribute('value', referralCode);
       checkReferralCodeMutation.mutate(referralCode);
     }
-  }, [checkReferralCodeMutation]);
+  }, []);
 
   if (error) {
     return (
