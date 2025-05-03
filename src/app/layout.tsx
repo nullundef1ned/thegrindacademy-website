@@ -4,6 +4,7 @@ import TitleProvider from "@/providers/title.provider";
 import { Analytics } from "@vercel/analytics/react";
 import environmentUtil from "@/utils/env.util";
 import { IMeta } from "./_module/app.interfaces";
+import { PostHogProvider } from "@/providers/PostHogProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -91,10 +92,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${gisha.variable} ${gishaBold.variable} antialiased bg-background`}
       >
-        <TitleProvider>
-          {children}
-        </TitleProvider>
-        <Analytics />
+        <PostHogProvider>
+          <TitleProvider>
+            {children}
+          </TitleProvider>
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   );
