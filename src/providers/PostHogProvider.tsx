@@ -2,7 +2,7 @@
 
 import posthog from "posthog-js"
 import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react"
-import { Suspense, useEffect } from "react"
+import { Suspense, useEffect, useRef } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
@@ -28,6 +28,8 @@ function PostHogPageView() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const posthog = usePostHog()
+  const lastEventTime = useRef<number>(0)
+  const DEBOUNCE_TIME = 1000 // 1 second
 
   useEffect(() => {
     if (pathname && posthog) {
@@ -39,14 +41,35 @@ function PostHogPageView() {
       posthog.capture("$pageview", { "$current_url": url })
     }
 
-    // Add beforeunload event listener
     const handleBeforeUnload = () => {
-      posthog.capture("$pageleave")
+      const now = Date.now()
+      if (now - lastEventTime.current > DEBOUNCE_TIME) {
+        lastEventTime.current = now
+        posthog.capture("$pageleave", { 
+          type: "website_exit",
+          url: window.location.href,
+          timestamp: now
+        })
+      }
     }
+
+    const handleInternalNavigation = () => {
+      const now = Date.now()
+      if (now - lastEventTime.current > DEBOUNCE_TIME) {
+        lastEventTime.current = now
+        posthog.capture("$pageleave", { 
+          type: "internal_navigation",
+          url: window.location.href,
+          timestamp: now
+        })
+      }
+    }
+
     window.addEventListener("beforeunload", handleBeforeUnload)
 
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload)
+      handleInternalNavigation()
     }
   }, [pathname, searchParams, posthog])
 
