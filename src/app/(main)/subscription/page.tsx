@@ -16,10 +16,11 @@ import LoadingIcons from 'react-loading-icons';
 import Image from 'next/image';
 import IconifyIcon from '@/components/IconifyIcon';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 export default function SubscriptionPage({ searchParams }: { searchParams: { "enrollment-course": string } }) {
 
   const axiosHandler = useAxios();
+  const router = useRouter();
 
   const form = useRef<HTMLFormElement>(null);
 
@@ -43,7 +44,7 @@ export default function SubscriptionPage({ searchParams }: { searchParams: { "en
     onSuccess: (data) => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       localStorage.removeItem('referral');
-      window.open(data, '_blank');
+      router.push(data)
       setTimeout(() => {
         setPaymentLink(data);
       }, 1000);
