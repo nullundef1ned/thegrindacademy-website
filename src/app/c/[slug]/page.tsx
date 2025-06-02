@@ -117,9 +117,10 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
             <Blur className='absolute w-1/2 left-1/2 -translate-x-1/2 h-full' />
             <InfiniteScroll items={course.media.imageUrls} initialDelay={initialDelay} height='350px' />
           </div>
+          <Button href={enrollmentURL} className='w-max mx-auto'>Enroll Now</Button>
         </div>
       </div>
-      <div className='max-w-screen-sm mx-auto py-10 flex flex-col items-center space-y-8'>
+      {/* <div className='max-w-screen-sm mx-auto py-10 flex flex-col items-center space-y-8'>
         <div className='space-y-2 text-center' data-aos='fade-up' data-aos-delay={initialDelay + 300}>
           <p className='text-accent text-2xl font-medium'>Course Lessons</p>
           <p className='text-muted text-sm'>What you can expect to learn</p>
@@ -129,10 +130,10 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
           {course.lessons.sort((a, b) => a.position - b.position).map((lesson, index) => (
             <div key={index}
               className='border rounded-md p-6 flex justify-between relative w-full'>
-              {/* <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />
+              <div className='absolute -top-1.5 -left-1.5 size-3 bg-[#353D50]' />
               <div className='absolute -top-1.5 -right-1.5 size-3 bg-[#353D50]' />
               <div className='absolute -bottom-1.5 -left-1.5 size-3 bg-[#353D50]' />
-              <div className='absolute -bottom-1.5 -right-1.5 size-3 bg-[#353D50]' /> */}
+              <div className='absolute -bottom-1.5 -right-1.5 size-3 bg-[#353D50]' />
               <div className='flex flex-col space-y-2'>
                 <p className='text-accent text-base font-medium'>{lesson.title}</p>
                 {lesson.description && (
@@ -146,8 +147,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
             </div>
           ))}
         </div>
-        <Button href={enrollmentURL} className='w-max mx-auto'>Enroll Now</Button>
-      </div>
+      </div> */}
     </Fragment>
   )
 }
