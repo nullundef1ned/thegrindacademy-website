@@ -2,7 +2,6 @@
 
 import React from 'react'
 import Blur from '@/components/Blur'
-import Image from 'next/image';
 import BrandBars from '@/components/BrandBars';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import useAxios from '@/hooks/useAxios';
