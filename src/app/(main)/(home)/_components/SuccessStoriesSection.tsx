@@ -2,12 +2,12 @@
 
 import React from 'react'
 import Blur from '@/components/Blur'
-import Image from 'next/image';
 import BrandBars from '@/components/BrandBars';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import useAxios from '@/hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import { IStudentInterview } from '@/app/_module/app.interfaces';
+import Video from '@/components/Video';
 
 export default function SuccessStoriesSection() {
   const initialDelay = 300;
@@ -47,9 +47,7 @@ export default function SuccessStoriesSection() {
           {interviews.map((interview: IStudentInterview, index: number) => (
             <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3'>
               <div className='p-4 border border-[#004DE838] rounded space-y-4 overflow-hidden bg-[#00246B29]'>
-                <div className='relative w-full h-80'>
-                  <Image src={interview.mediaUrl} alt={interview.fullName} fill className='object-cover' />
-                </div>
+                <Video src={interview.mediaUrl} poster={interview.mediaUrl} />
                 <div className='flex flex-col space-y-2'>
                   <p className='text-3xl font-gishaBold select-none'>{interview.fullName}</p>
                   <p className='text-accent text-sm line-clamp-3 select-none'>{interview.description}</p>
