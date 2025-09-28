@@ -19,13 +19,13 @@ export default function Home() {
       <LandingSection />
       <InfluencerSection />
       <CourseOfferingsSection />
-      <TestimonialSection />
+      <SuccessStoriesSection />
       <CommunityInvitationSection />
       <CoursesSection />
       <DynamicContentSection />
       <RiskFreeSection />
       <PlansSection />
-      <SuccessStoriesSection />
+      <TestimonialSection />
       <AffiliateProgramInvitation />
       <CertificateSection />
       <FAQSection />
