@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import environmentUtil from "@/utils/env.util";
 import { IMeta } from "./_module/app.interfaces";
 import { PostHogProvider } from "@/providers/PostHogProvider";
+import GoogleTagManager from "@/components/GoogleTagManager";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -92,6 +93,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${gisha.variable} ${gishaBold.variable} antialiased bg-background`}
       >
+        <GoogleTagManager />
         <PostHogProvider>
           <TitleProvider>
             {children}
